@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "common_lib",
+    //har：静态包； shared：动态包
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}

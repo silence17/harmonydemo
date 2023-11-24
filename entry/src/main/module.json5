@@ -1,0 +1,89 @@
+{
+  "module": {
+    "name": "entry",
+    //Entry类型的HAP：
+    //是应用的主模块，在module.json5配置文件中的type标签配置为“entry”类型。在同一个应用中，同一设备类型只支持一个Entry类型的HAP，通常用于实现应用的入口界面、入口图标、主特性功能等
+    //Feature类型的HAP：
+    //是应用的动态特性模块，在module.json5配置文件中的type标签配置为“feature”类型。一个应用程序包可以包含一个或多个Feature类型的HAP，也可以不包含；Feature类型的HAP通常用于实现应用的特性功能，可以配置成按需下载安装，也可以配置成随Entry类型的HAP一起下载安装（请参见module对象内部结构中的“deliveryWithInstall”）。
+    "type": "entry",
+    "description": "$string:module_desc",
+    //确定应用主入口
+    "mainElement": "EntryAbility",
+    //配置，相当于Android Application
+    "srcEntry": "./ets/app/MyApp.ts",
+    "deviceTypes": [
+      "phone"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    //标识当前Module中UIAbility的配置信息，标签值为数组类型，只对当前UIAbility生效。
+    "abilities": [
+      {
+        "name": "EntryAbility",
+        "srcEntry": "./ets/entryability/EntryAbility.ts",
+        // UIAbility组件的描述信息
+        "description": "$string:entryAbility_desc",
+        //应用图标.需要在主入口中配置
+        "icon": "$media:icon",
+        "label": "$string:entryAbility_label",
+        // UIAbility组件启动页面图标资源文件的索引
+        "startWindowIcon": "$media:icon",
+        // UIAbility组件启动页面背景颜色资源文件的索引
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "orientation": "portrait",
+        // 标识当前UIAbility组件或ExtensionAbility组件能够接收的 Want 的特征集，为数组格式。
+        //- 对于Entry类型的HAP，HarmonyOS应用可以配置多个具有入口能力的skills标签（即配置了ohos.want.action.home和entity.system.home）。
+        //- 对于Feature类型的HAP，只有HarmonyOS应用可以配置具有入口能力的skills标签，HarmonyOS服务不允许配置。
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      },
+      {
+        // UIAbility组件的名称
+        "name": "TestAbility",
+        // UIAbility组件的代码路径
+        "srcEntry": "./ets/entryability/TestAbility.ets",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background",
+        "orientation": "portrait"
+      },
+      {
+        "name": "LoginAbility",
+        "srcEntry": "./ets/loginability/LoginAbility.ts",
+        "description": "$string:LoginAbility_desc",
+        "startWindowIcon": "$media:icon",
+        "startWindowBackground": "$color:start_window_background"
+      }
+    ],
+    "extensionAbilities": [],
+    "requestPermissions": [
+      {
+        //获取网络连接信息。
+        "name": "ohos.permission.GET_NETWORK_INFO"
+      },
+      {
+        //修改网络连接状态。
+        "name": "ohos.permission.SET_NETWORK_INFO"
+      },
+      {
+        //允许程序打开网络套接字，进行网络连接。
+        "name": "ohos.permission.INTERNET"
+      },
+      {
+        "name": "ohos.permission.WRITE_USER_STORAGE"
+      },
+      {
+        "name": " ohos.permission.READ_USER_STORAGE"
+      }
+    ]
+  }
+}

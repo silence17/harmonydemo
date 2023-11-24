@@ -1,0 +1,1 @@
+pkg_modules@entry/@app/common_lib:com.example.rankdemo/entry@common_lib/index

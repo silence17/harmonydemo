@@ -1,0 +1,12 @@
+{
+  "string": [
+    {
+      "name": "app_name",
+      "value": "RankingDemo"
+    },
+    {
+      "name": "default_str",
+      "value": " "
+    }
+  ]
+}
