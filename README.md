@@ -42,7 +42,10 @@
 1. github 创建仓库 new repository
 切换到本地项目目录：
 2. git init (快捷键Command + Shift + .  查看生成的.git文件)
-3. git add . 
+3. git add . (将本地项目中的全部文件添加至git中，命令中.的含义就是“全部文件”。)
+4. git commit -m "description" （添加项目的描述文字，命令中description就是自定义的描述文字。）
+5. git remote add origin pj_ssh_path，其中pj_ssh_path可通过下下图的方式进行复制粘贴，比如我这里的pj_ssh_path为git@github.com:silence17/harmonydemo.git
+6. git push -f origin master，将本地项目的文件上传至Github官网中
 
 
 
