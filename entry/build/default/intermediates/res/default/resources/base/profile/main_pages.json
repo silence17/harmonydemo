@@ -1,9 +1,0 @@
-{
-  "src": [
-    "pages/RankPage",
-    "pages/TestPage",
-    "pages/NavigationExamplePage",
-    "pages/MainPage",
-    "pages/LoginPage"
-  ]
-}
