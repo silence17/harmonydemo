@@ -13,7 +13,9 @@ export struct MinePage {
   @State userInfo: UserInfoBean = new UserInfoBean()
 
   onLoginChange() {
-    if (!StringUtil.isEmpty(this.userJson)) {
+    if (StringUtil.isEmpty(this.userJson)) {
+      this.userInfo = new UserInfoBean()
+    } else {
       this.userInfo = JSON.parse(this.userJson)
     }
   }

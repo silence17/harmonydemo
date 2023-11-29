@@ -25,6 +25,12 @@ export class MineViewModel {
         icon: $r('app.media.icon_call_server'),
         title: '联系客服',
         rightIcon: $r('app.media.icon_right_arrow')
+      },
+      {
+        id: 3,
+        type: 1,
+        icon: null,
+        title: '退出登陆',
       }
     ]
   }

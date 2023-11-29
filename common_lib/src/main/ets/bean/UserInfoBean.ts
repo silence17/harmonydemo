@@ -15,10 +15,6 @@ export class UserInfoBean {
     this.cellPhone = cellPhone
   }
 
-  isLogin(): boolean {
-    return!StringUtil.isEmpty(this.id) && !StringUtil.isEmpty(this.token)
-  }
-
   /**
    * 接口返回对象转换
    */

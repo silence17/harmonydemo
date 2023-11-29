@@ -8,10 +8,14 @@ import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
 @Component
 export struct UserInfoComponent {
   @Link @Watch('onChange') userInfo: UserInfoBean
-  @State nickName: string = '登陆/注册';
+  @State nickName: string = '登陆/注册'
 
   onChange() {
-    this.nickName = this.userInfo.nickName
+    if (UserUtil.getInstance().isLogin()) {
+      this.nickName = this.userInfo.nickName
+    } else {
+      this.nickName = '登陆/注册';
+    }
     Log.debug("UserInfoComponent.onChange ", this.userInfo.nickName)
   }
 

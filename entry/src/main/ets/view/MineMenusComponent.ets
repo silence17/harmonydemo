@@ -1,6 +1,10 @@
+import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil'
 import promptAction from '@ohos.promptAction'
 import { ItemBean } from '../bean/ItemBean'
 import { MineViewModel } from '../viewmodel/MineViewModel'
+import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant'
+import { UserUtil } from '../util/UserUtil'
+import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean'
 
 @Component
 export struct MineMenusComponents {
@@ -30,10 +34,17 @@ export struct MineMenusComponents {
         .margin({ left: 10, right: 10 })
         .backgroundColor(Color.White)
         .onClick((event) => {
-          promptAction.showToast({
-            message: "List Item Click",
-            duration: 2000
-          })
+          switch (item.id) {
+            case 3:
+            //登陆成功回调
+              UserUtil.getInstance().setUserInfo(new UserInfoBean())
+              AppStorage.Set<string>(CACHE_USER_INFO, '');
+              ToastUtil.showToast('退出登陆成功')
+              break;
+            default:
+              ToastUtil.showToast("===== " + item.title)
+              break;
+          }
         })
       }, (item: ItemBean) => JSON.stringify(item))
     }
