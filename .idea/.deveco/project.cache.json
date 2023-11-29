@@ -2,7 +2,7 @@
 	"BuildOptions":{
 		"BUNDLE_NAME":"com.example.rankdemo",
 		"BUILD_PATH":{
-			"OUTPUT_PATH":"/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo/RankingDemo/build/outputs/default"
+			"OUTPUT_PATH":"/Users/huchangjie/Documents/huchangjie_github/harmonydemo/build/outputs/default"
 		},
 		"SELECT_BUILD_PRODUCT":"default"
 	},

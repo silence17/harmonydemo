@@ -27,10 +27,26 @@ export struct HomeComponent {
   build() {
 
     Column() {
-      Button('get request').onClick((event) => {
-
-        this.requestPost();
-      })
+      Button('get request')
+        .onClick((event) => {
+          //发送网络请求
+          this.requestPost();
+        })
+          //选择器
+        .stateStyles({
+          normal: {
+            .backgroundColor(Color.Red)
+          },
+          focused: {
+            .backgroundColor(Color.Green)
+          },
+          clicked: {
+            .backgroundColor(Color.Gray)
+          },
+          pressed: {
+            .backgroundColor(Color.Pink)
+          }
+        })
     }
   }
 

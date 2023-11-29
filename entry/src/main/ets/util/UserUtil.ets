@@ -3,8 +3,8 @@ import { StringUtil, UserInfo } from '@app/common_lib';
 export class UserUtil {
   private static instance: UserUtil
 
- /* @StorageLink('cache_user_info_json')*/
-  private  userInfo: string = ''
+  /* @StorageLink('cache_user_info_json')*/
+  private userInfo: string = ''
 
   private constructor() {
   }
@@ -18,6 +18,10 @@ export class UserUtil {
 
 
   public isLogin(): boolean {
+
+    if (StringUtil.isEmpty(this.userInfo)) {
+      return false
+    }
     let userBean = JSON.parse(this.userInfo) as UserInfo
     return userBean != null && !StringUtil.isEmpty(userBean.token)
   }

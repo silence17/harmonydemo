@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/RankingDemo.iml" filepath="$PROJECT_DIR$/.idea/modules/RankingDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common_lib/common_lib.iml" filepath="$PROJECT_DIR$/.idea/modules/common_lib/common_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/entry/entry.iml" filepath="$PROJECT_DIR$/.idea/modules/entry/entry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/harmonydemo.iml" filepath="$PROJECT_DIR$/.idea/modules/harmonydemo.iml" />
     </modules>
   </component>
 </project>

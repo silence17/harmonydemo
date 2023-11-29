@@ -1,4 +1,4 @@
-import { HomeComponent } from '../view/HomeComponent';
+import { HomeComponent } from './HomeComponent';
 import { APP_EXIT_INTERVAL, TIME } from '../common/constants/Constants';
 import promptAction from '@ohos.promptAction';
 import { MinePage } from './MinePage';

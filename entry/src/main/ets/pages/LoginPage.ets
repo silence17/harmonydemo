@@ -10,16 +10,15 @@ import {
 import promptAction from '@ohos.promptAction'
 import display from '@ohos.display'
 import { LoginViewModel } from '../viewmodel/LoginViewModel'
-import router from '@ohos.router'
 
-
+//组件入口，主组件
 @Entry
 @Component
 struct LoginPage {
   @State isRefreshData: boolean = false
   @State btnColor: string = '#991890FF'
   @State phone: string = '15204697356'
-  @State pwd: string = ''
+  @State pwd: string = '123123'
   //获取屏幕的宽度
   screenWidth: number = px2vp(display.getDefaultDisplaySync().width)
   @Provide viewModel: LoginViewModel = new LoginViewModel()
@@ -46,13 +45,13 @@ struct LoginPage {
         .width(60)
 
       Text('欢迎使用蜂采优选')
-        .fontColor('#333333')
+        .inputStyle()
         .fontSize(22)
         .margin({ top: 10 })
 
       Row() {
         Text('没有账号?')
-          .fontColor('#333333')
+          .inputStyle()
           .fontSize(13)
         Text('立即注册')
           .fontColor('#1890FF')
@@ -156,4 +155,11 @@ struct LoginPage {
     this.btnColor =
       (StringUtil.isEmpty(this.phone) || StringUtil.isEmpty(this.pwd)) ? '#991890FF' : '#1890FF'
   }
+}
+
+/**
+ * @Extend 样式复用
+ */
+@Extend(Text) function inputStyle() {
+  .fontColor('#333333')
 }
