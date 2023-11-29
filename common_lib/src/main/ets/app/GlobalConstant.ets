@@ -1,5 +1,6 @@
+export const CACHE_USER_INFO: string = 'cache_user_info_json'
+
 export class GlobalConstant {
-  static readonly CACHE_USER_INFO: string = 'cache_user_info_json'
 
   /**
    * The delay time.

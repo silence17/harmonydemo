@@ -3,8 +3,9 @@ import { APP_EXIT_INTERVAL, TIME } from '../common/constants/Constants';
 import promptAction from '@ohos.promptAction';
 import { MinePage } from './MinePage';
 import { NavList, TabId } from '../model/NavDataModel';
+import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 
-PersistentStorage.PersistProp<string>('cache_user_info_json', '')
+PersistentStorage.PersistProp<string>(CACHE_USER_INFO, '')
 
 
 @Entry

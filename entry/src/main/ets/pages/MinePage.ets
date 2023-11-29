@@ -2,14 +2,14 @@ import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
 import { MineMenusComponents } from '../view/MineMenusComponent';
 import { UserInfoComponent } from '../view/UserInfoComponent';
 import { MineViewModel } from '../viewmodel/MineViewModel';
-import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil';
 import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
+import { CACHE_USER_INFO, GlobalConstant } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 
 @Preview
 @Component
 export struct MinePage {
   @Provide viewModel: MineViewModel = new MineViewModel()
-  @StorageProp('cache_user_info_json') @Watch('onLoginChange') userJson: string = ''
+  @StorageProp(CACHE_USER_INFO) @Watch('onLoginChange') userJson: string = ''
   @State userInfo: UserInfoBean = new UserInfoBean()
 
   onLoginChange() {

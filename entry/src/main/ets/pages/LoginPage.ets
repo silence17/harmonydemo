@@ -1,6 +1,7 @@
 import {
   ClearEditText,
   CommonTitleComponent,
+  GlobalConstant,
   Log,
   PreferencesUtil,
   StringUtil,
@@ -11,6 +12,7 @@ import promptAction from '@ohos.promptAction'
 import display from '@ohos.display'
 import { LoginViewModel } from '../viewmodel/LoginViewModel'
 import common from '@ohos.app.ability.common'
+import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant'
 
 /**
  * 组件入口，主组件
@@ -109,7 +111,7 @@ struct LoginPage {
           this.viewModel.login(this.phone, this.pwd, (userInfo: UserInfoBean) => {
             this.jumpToMainAbility()
             //登陆成功回调
-            AppStorage.Set<string>('cache_user_info_json', JSON.stringify(userInfo));
+            AppStorage.Set<string>(CACHE_USER_INFO, JSON.stringify(userInfo));
           })
         })
 
