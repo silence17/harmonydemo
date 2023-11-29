@@ -59,7 +59,7 @@ export class LoginViewModel {
         } else {
           let userInfo = UserInfoBean.toUserBeanTransition(resultJson.data)
           UserUtil.getInstance().setUserInfo(userInfo)
-          // PreferencesUtil.getInstance().putString('cellphone', phone)
+          PreferencesUtil.getInstance().putString('cellphone', phone)
           callback(userInfo)
         }
       } else {
