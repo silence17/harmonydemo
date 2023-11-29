@@ -1,9 +1,9 @@
-import { UserInfo } from '@app/common_lib';
+import { UserInfoBean } from '@app/common_lib';
 import { ItemBean } from '../bean/ItemBean'
 
 export class MineViewModel {
   listSource: Array<ItemBean>
-  userInfo: UserInfo;
+  userInfo: UserInfoBean;
 
   public initData() {
     this.getMenusList()
@@ -30,7 +30,7 @@ export class MineViewModel {
   }
 
   private getUserInfo() {
-    this.userInfo = globalThis.userInfo
+    //this.userInfo = globalThis.userInfo
     //this.userInfo = new UserInfo("1001", "xiaojie", "15600006833", null);
   }
 }

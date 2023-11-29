@@ -21,12 +21,34 @@ import promptAction from '@ohos.promptAction';
  */
 @Component
 export struct HomeComponent {
+  @State @Watch('onChange') count: number = 1
+  @State @Watch('onChange') pow: number = 2
+  @State res: number = 1
+
+  onChange() {
+    this.res = Math.pow(this.count, this.pow)
+  }
+
   onPageShow() {
   }
 
   build() {
-
     Column() {
+
+      Text('基数')
+        .commonText()
+        .onClick(() => {
+          this.count++
+        })
+
+      Text('次幂')
+        .commonText()
+        .onClick(() => {
+          this.pow++
+        })
+      Text('结果： ' + this.res)
+        .commonText()
+
       Button('get request')
         .onClick((event) => {
           //发送网络请求
@@ -106,4 +128,8 @@ export struct HomeComponent {
       httpRequest.destroy();
     })
   }
+}
+
+@Extend(Text) function commonText() {
+  .fontSize(20)
 }

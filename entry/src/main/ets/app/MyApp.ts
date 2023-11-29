@@ -3,7 +3,6 @@ import { Log } from '@app/common_lib';
 import { PreferencesUtil } from '@app/common_lib';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import preferences from '@ohos.data.preferences';
-import { UserInfo } from '@app/common_lib/src/main/ets/bean/UserInfo';
 
 
 /**

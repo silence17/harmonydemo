@@ -5,13 +5,16 @@ import {
   PreferencesUtil,
   StringUtil,
   ToastUtil,
-  UserInfo
+  UserInfoBean
 } from '@app/common_lib'
 import promptAction from '@ohos.promptAction'
 import display from '@ohos.display'
 import { LoginViewModel } from '../viewmodel/LoginViewModel'
+import common from '@ohos.app.ability.common'
 
-//组件入口，主组件
+/**
+ * 组件入口，主组件
+ */
 @Entry
 @Component
 struct LoginPage {
@@ -103,7 +106,11 @@ struct LoginPage {
         .backgroundColor(this.btnColor)
         .id('login')
         .onClick((event) => {
-          this.viewModel.login(this.phone, this.pwd)
+          this.viewModel.login(this.phone, this.pwd, (userInfo: UserInfoBean) => {
+            this.jumpToMainAbility()
+            //登陆成功回调
+            AppStorage.Set<string>('cache_user_info_json', JSON.stringify(userInfo));
+          })
         })
 
       Text('忘记密码')
@@ -154,6 +161,22 @@ struct LoginPage {
   getBtnBackground() {
     this.btnColor =
       (StringUtil.isEmpty(this.phone) || StringUtil.isEmpty(this.pwd)) ? '#991890FF' : '#1890FF'
+  }
+
+  jumpToMainAbility() {
+    //context为调用方UIAbility的AbilityContext
+    let context = getContext(this) as common.UIAbilityContext;
+    let wantInfo = {
+      bundleName: 'com.example.rankdemo',
+      //待启动的UIAbility
+      abilityName: 'EntryAbility',
+      //moduleName在待启动的UIAbility属于不同的Module时添加
+      parameters: {
+        info: '来自EntryAbility Index页面'
+      },
+    }
+    context.startAbility(wantInfo)
+    context.terminateSelf()
   }
 }
 

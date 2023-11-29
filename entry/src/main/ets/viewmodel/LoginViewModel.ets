@@ -1,14 +1,22 @@
-import { Log, PreferencesUtil, ResponseResult, ToastUtil, UserInfo } from '@app/common_lib';
+import { Log, PreferencesUtil, ResponseResult, ToastUtil, UserInfoBean } from '@app/common_lib';
 import http from '@ohos.net.http';
 import common from '@ohos.app.ability.common';
 import AppContext from '@ohos.app.ability.common';
+import { UserUtil } from '../util/UserUtil';
 
+
+/**
+ * 1.导入http模块
+ * 2.常见http请求对象
+ * 3.发起请求
+ * 4.处理结果
+ */
 export class LoginViewModel {
   public initData() {
   }
 
 
-  login(phone: string, pwd: string, callback?: Function) {
+  login(phone: string, pwd: string, callback: Function) {
     let httpRequest = http.createHttp();
 
     httpRequest.on('headersReceive', (header) => {
@@ -49,10 +57,10 @@ export class LoginViewModel {
         if (resultJson.status === -1) {
           ToastUtil.showToast(resultJson.msg)
         } else {
-          let userInfo = UserInfo.toUserBeanTransition(resultJson.data)
-          AppStorage.Set<string>('cache_user_info_json', JSON.stringify(userInfo));
-          PreferencesUtil.getInstance().putString('cellphone', phone)
-          this.jumpToMainAbility()
+          let userInfo = UserInfoBean.toUserBeanTransition(resultJson.data)
+          UserUtil.getInstance().setUserInfo(userInfo)
+          // PreferencesUtil.getInstance().putString('cellphone', phone)
+          callback(userInfo)
         }
       } else {
         ToastUtil.showToast(JSON.stringify(err))
@@ -62,27 +70,5 @@ export class LoginViewModel {
       // 当该请求使用完毕时，调用destroy方法主动销毁
       httpRequest.destroy();
     })
-  }
-
-  jumpToMainAbility() {
-    let wantInfo = {
-      bundleName: 'com.example.rankdemo',
-      //待启动的UIAbility
-      abilityName: 'EntryAbility',
-      //moduleName在待启动的UIAbility属于不同的Module时添加
-      parameters: {
-        info: '来自EntryAbility Index页面'
-      },
-    }
-    //context为调用方UIAbility的AbilityContext
-    let context = getContext(this) as common.UIAbilityContext;
-    context.startAbility(wantInfo).then(() => {
-      Log.debug('%{public}s' + 'startAbility');
-    }).catch((err) => {
-
-    });
-
-    let handler = getContext(this) as AppContext.UIAbilityContext;
-    handler.terminateSelf();
   }
 }

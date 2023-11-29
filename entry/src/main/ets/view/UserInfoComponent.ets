@@ -2,11 +2,18 @@ import { Log } from '@app/common_lib/src/main/ets/utils/Log/Log'
 import media from '@ohos.multimedia.media'
 import common from '@ohos.app.ability.common';
 import { UserUtil } from '../util/UserUtil';
+import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
 
 
 @Component
 export struct UserInfoComponent {
-  @Link userInfo: string
+  @Link @Watch('onChange') userInfo: UserInfoBean
+  @State nickName: string = '登陆/注册';
+
+  onChange() {
+    this.nickName = this.userInfo.nickName
+    Log.debug("UserInfoComponent.onChange ", this.userInfo.nickName)
+  }
 
   build() {
     //用户信息
@@ -17,7 +24,7 @@ export struct UserInfoComponent {
         .margin({ left: 10 })
         .width(66)
 
-      Text(UserUtil.getInstance().isLogin() ? this.userInfo : '登陆/注册')
+      Text(this.nickName)
         .fontSize(18)
         .fontColor('#000000')
         .margin({ left: 12 })

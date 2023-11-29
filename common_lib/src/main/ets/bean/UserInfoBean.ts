@@ -1,4 +1,6 @@
-export class UserInfo {
+import { StringUtil } from '../utils/StringUtil'
+
+export class UserInfoBean {
   id: string
   nickName?: string
   username?: string
@@ -13,11 +15,15 @@ export class UserInfo {
     this.cellPhone = cellPhone
   }
 
+  isLogin(): boolean {
+    return!StringUtil.isEmpty(this.id) && !StringUtil.isEmpty(this.token)
+  }
+
   /**
    * 接口返回对象转换
    */
-  static toUserBeanTransition(obj: any): UserInfo {
-    let userInfo = new UserInfo()
+  static toUserBeanTransition(obj: any): UserInfoBean {
+    let userInfo = new UserInfoBean()
     userInfo.id = obj?.id
     userInfo.nickName = obj?.nickName
     userInfo.username = obj?.username

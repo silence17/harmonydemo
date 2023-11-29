@@ -15,7 +15,7 @@ export { ToastUtil } from './src/main/ets/utils/ToastUtil'
 
 export { StringUtil } from './src/main/ets/utils/StringUtil'
 
-export { UserInfo } from './src/main/ets/bean/UserInfo'
+export { UserInfoBean } from './src/main/ets/bean/UserInfoBean'
 
 export { GlobalConstant } from './src/main/ets/app/GlobalConstant'
 
