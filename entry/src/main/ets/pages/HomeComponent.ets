@@ -13,120 +13,110 @@ import { Log } from '@app/common_lib/src/main/ets/utils/Log/Log';
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import http from '@ohos.net.http';
-import promptAction from '@ohos.promptAction';
+import { HomeViewModel } from '../viewmodel/HomeViewModel';
+import display from '@ohos.display';
+import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil';
+import List from '@ohos.util.List';
+import { RecommendBean } from '../bean/RecommendBean';
+import ArrayList from '@ohos.util.ArrayList';
+
 
 /**
  * home
  */
+@Preview
 @Component
 export struct HomeComponent {
-  @State @Watch('onChange') count: number = 1
-  @State @Watch('onChange') pow: number = 2
-  @State res: number = 1
+  private displayWidth: number = px2vp(display.getDefaultDisplaySync().width)
+  @State list: Array<RecommendBean> = new Array()
+  @Provide viewModel: HomeViewModel = new HomeViewModel()
+  scrollerListener: Scroller = new Scroller()
 
-  onChange() {
-    this.res = Math.pow(this.count, this.pow)
-  }
-
-  onPageShow() {
+  aboutToAppear() {
+    this.viewModel.getRecommendProducts((list: Array<RecommendBean>) => {
+      this.list = list
+      ToastUtil.showToast("==== " + list.length)
+    })
   }
 
   build() {
-    Column() {
+    Stack() {
+      Image($r('app.media.bg_home_top_enterprise'))
+        .width('100%')
 
-      Text('基数')
-        .commonText()
-        .onClick(() => {
-          this.count++
-        })
+      /*搜索*/
+      Row() {
+        Text("搜索商品/规格/分类/店铺/企业")
+          .fontSize(12)
+          .fontColor('#999999')
+          .layoutWeight(1)
 
-      Text('次幂')
-        .commonText()
-        .onClick(() => {
-          this.pow++
-        })
-      Text('结果： ' + this.res)
-        .commonText()
-
-      Button('get request')
-        .onClick((event) => {
-          //发送网络请求
-          this.requestPost();
-        })
-          //选择器
-        .stateStyles({
-          normal: {
-            .backgroundColor(Color.Red)
-          },
-          focused: {
-            .backgroundColor(Color.Green)
-          },
-          clicked: {
-            .backgroundColor(Color.Gray)
-          },
-          pressed: {
-            .backgroundColor(Color.Pink)
-          }
-        })
-    }
-  }
-
-  private requestPost() {
-    let httpRequest = http.createHttp();
-
-    httpRequest.on('headersReceive', (header) => {
-      Log.debug('header: ' + JSON.stringify(header))
-    })
-    httpRequest.request("https://test.beeselect.net/j/api/product/searchList", {
-      method: http.RequestMethod.POST,
-      header: {
-        'Content-Type': 'application/json'
-      },
-      extraData: {
-        "pageSize": 20,
-        "sort": 1,
-        "pageNum": 1,
-        "token": "",
-        "Authorization": "",
-        "platform": "2",
-        "applicationCode": "3",
-        "version": "3.2.1",
-        "fromSource": "3.2.1",
-        "businessType": "1",
-      },
-      expectDataType: http.HttpDataType.STRING, // 可选，指定返回数据的类型
-      usingCache: true, // 可选，默认为true
-      priority: 1, // 可选，默认为1
-      connectTimeout: 60000, // 可选，默认为60000ms
-      readTimeout: 60000, // 可选，默认为60000ms
-      usingProtocol: http.HttpProtocol.HTTP1_1, // 可选，协议类型默认值由系统自动指定
-    }, (err, data) => {
-
-      if (data.responseCode === http.ResponseCode.OK) {
-        console.info('Result:' + data.result);
-        console.info('code:' + data.responseCode);
+        Image($r('app.media.icon_search'))
+          .height(17)
+          .width(17)
       }
-      if (!err) {
-        // data.result为HTTP响应内容，可根据业务需要进行解析
-        Log.info('Result:' + JSON.stringify(data.result));
-        // data.header为HTTP响应头，可根据业务需要进行解析
-        Log.info('header:' + JSON.stringify(data.header));
-        Log.info('cookies:' + JSON.stringify(data.cookies)); // 8+
+      .borderWidth(1)
+      .borderColor('#999999')
+      .borderRadius(15)
+      .backgroundColor(Color.White)
+      .width(this.displayWidth - 20)
+      .height(30)
+      .margin({ left: 10, right: 10, top: 15 })
+      .padding({ left: 10, right: 10 })
+      .align(Alignment.Start)
 
-        const obj = JSON.parse(data.result.toString());
-      } else {
-        Log.info('error:' + JSON.stringify(err));
-        promptAction.showToast({
-          message: JSON.stringify(err),
-          duration: 2000
+      Column() {
+        Grid(this.scrollerListener) {
+          ForEach(this.list, (item: RecommendBean) => {
+            GridItem() {
+              Column() {
+                Image(item.searchImgUrl)
+                  .width('100%')
+                  .height((this.displayWidth - 30) / 2)
+
+                Text(item.productname)
+                  .fontSize(17)
+                  .fontColor('#333333')
+                  .margin({ top: 10 })
+                  .textOverflow({ overflow: TextOverflow.Ellipsis })
+                  .width('100%')
+                  .maxLines(2)
+                  .textAlign(TextAlign.Start)
+                  .padding({ left: 10, right: 10 })
+
+                Row() {
+                  Text(`¥` + item.salePrice.priceDesc)
+                    .fontSize(14)
+                    .fontColor('#FF5C00')
+
+                  Text(`销量` + item.saleCountDesc)
+                    .fontSize(12)
+                    .fontColor('#333333')
+                }.justifyContent(FlexAlign.SpaceBetween)
+                .width('100%')
+                .margin({ top: 2 })
+                .padding({ left: 10, right: 10 })
+              }
+              .width('100%')
+              .padding({ bottom: 10 })
+              .borderRadius(10)
+              .backgroundColor(Color.White)
+            }
+          })
+        }
+        .columnsTemplate('1fr 1fr')
+        .columnsGap(10)
+        .rowsGap(10)
+        .width('100%')
+        .padding(10)
+        .onScrollIndex((first: number) => {
+          console.info(first.toString())
         })
       }
-      // 取消订阅HTTP响应头事件
-      httpRequest.off('headersReceive');
-      // 当该请求使用完毕时，调用destroy方法主动销毁
-      httpRequest.destroy();
-    })
+      .margin({ top: 45 })
+    }.alignContent(Alignment.TopStart)
+    .size({ width: '100%', height: '100%' })
+    .backgroundColor('#F6F6F6')
   }
 }
 

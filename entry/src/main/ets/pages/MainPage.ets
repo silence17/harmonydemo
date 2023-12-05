@@ -26,6 +26,8 @@ struct MainPage {
         .fontSize(10)
         .margin({ top: 3 })
     }
+    .height(44)
+    .justifyContent(FlexAlign.Center)
     .onClick((event) => {
       this.currentIndex = index;
       this.tabsController.changeIndex(this.currentIndex)
@@ -52,7 +54,6 @@ struct MainPage {
     Tabs({ barPosition: BarPosition.End, controller: this.tabsController }) {
       TabContent() {
         HomeComponent()
-          .margin({ top: 10, left: 10 })
           .size({ width: '100%', height: '100%' })
       }.tabBar(this.TabBuilder(TabId.HOME))
 
