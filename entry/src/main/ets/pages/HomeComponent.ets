@@ -19,6 +19,7 @@ import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil';
 import List from '@ohos.util.List';
 import { RecommendBean } from '../bean/RecommendBean';
 import ArrayList from '@ohos.util.ArrayList';
+import { Banner } from '../view/banner/Banner';
 
 
 /**
@@ -67,6 +68,12 @@ export struct HomeComponent {
 
       Column() {
         Grid(this.scrollerListener) {
+
+          GridItem() {
+            Banner()
+          }.columnStart(1)
+          .columnEnd(2)
+
           ForEach(this.list, (item: RecommendBean) => {
             GridItem() {
               Column() {
