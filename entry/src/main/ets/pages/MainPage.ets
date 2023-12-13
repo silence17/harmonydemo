@@ -70,6 +70,7 @@ struct MainPage {
     .scrollable(true)
     //Tabs的属性barMode是控制导航栏是否可以滚动，默认值为Fixed。
     .barMode(BarMode.Fixed)
+    .vertical(false)
     .onChange((index) => {
       this.currentIndex = index
     })

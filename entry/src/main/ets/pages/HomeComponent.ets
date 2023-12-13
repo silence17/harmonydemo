@@ -20,6 +20,11 @@ import List from '@ohos.util.List';
 import { RecommendBean } from '../bean/RecommendBean';
 import ArrayList from '@ohos.util.ArrayList';
 import { Banner } from '../view/banner/Banner';
+import { RefreshLoadLayout } from '@app/common_lib/src/main/ets/components/view/RefreshLoadLayout';
+import { RefreshLoadLayoutBean } from '@app/common_lib/src/main/ets/bean/RefreshLoadLayoutBean';
+import { PageState } from '@app/common_lib/src/main/ets/app/GlobalConstant';
+import { RefreshFailLayout } from '@app/common_lib/src/main/ets/components/view/RefreshFailLayout';
+import { FailLayoutBean } from '@app/common_lib/src/main/ets/bean/FailLayoutBean';
 
 
 /**
@@ -29,12 +34,15 @@ import { Banner } from '../view/banner/Banner';
 @Component
 export struct HomeComponent {
   private displayWidth: number = px2vp(display.getDefaultDisplaySync().width)
+  //状态切换
+  @State pageState: PageState = PageState.Loading
   @State list: Array<RecommendBean> = new Array()
   @Provide viewModel: HomeViewModel = new HomeViewModel()
   scrollerListener: Scroller = new Scroller()
 
   aboutToAppear() {
     this.viewModel.getRecommendProducts((list: Array<RecommendBean>) => {
+      this.pageState = PageState.Fail
       this.list = list
       ToastUtil.showToast("==== " + list.length)
     })
@@ -67,63 +75,106 @@ export struct HomeComponent {
       .align(Alignment.Start)
 
       Column() {
-        Grid(this.scrollerListener) {
 
-          GridItem() {
-            Banner()
-          }.columnStart(1)
-          .columnEnd(2)
-
-          ForEach(this.list, (item: RecommendBean) => {
-            GridItem() {
-              Column() {
-                Image(item.searchImgUrl)
-                  .width('100%')
-                  .height((this.displayWidth - 30) / 2)
-
-                Text(item.productname)
-                  .fontSize(17)
-                  .fontColor('#333333')
-                  .margin({ top: 10 })
-                  .textOverflow({ overflow: TextOverflow.Ellipsis })
-                  .width('100%')
-                  .maxLines(2)
-                  .textAlign(TextAlign.Start)
-                  .padding({ left: 10, right: 10 })
-
-                Row() {
-                  Text(`¥` + item.salePrice.priceDesc)
-                    .fontSize(14)
-                    .fontColor('#FF5C00')
-
-                  Text(`销量` + item.saleCountDesc)
-                    .fontSize(12)
-                    .fontColor('#333333')
-                }.justifyContent(FlexAlign.SpaceBetween)
-                .width('100%')
-                .margin({ top: 2 })
-                .padding({ left: 10, right: 10 })
-              }
-              .width('100%')
-              .padding({ bottom: 10 })
-              .borderRadius(10)
-              .backgroundColor(Color.White)
-            }
-          })
+        if (this.pageState == PageState.Loading) {
+          this.LoadingLayout()
+        } else if (this.pageState == PageState.Normal) {
+          this.normalDraw()
+        } else if (this.pageState == PageState.Fail) {
+          this.FailLayout()
         }
-        .columnsTemplate('1fr 1fr')
-        .columnsGap(10)
-        .rowsGap(10)
-        .width('100%')
-        .padding(10)
-        .onScrollIndex((first: number) => {
-          console.info(first.toString())
-        })
       }
       .margin({ top: 45 })
     }.alignContent(Alignment.TopStart)
     .size({ width: '100%', height: '100%' })
     .backgroundColor('#F6F6F6')
+  }
+
+  @Builder normalDraw() {
+    Grid(this.scrollerListener) {
+
+      GridItem() {
+        Banner()
+      }.columnStart(1)
+      .columnEnd(2)
+
+      ForEach(this.list, (item: RecommendBean) => {
+        GridItem() {
+          this.itemDraw(item)
+        }
+      })
+    }
+    .columnsTemplate('1fr 1fr')
+    .columnsGap(10)
+    .rowsGap(10)
+    .width('100%')
+    .padding(10)
+    .onScrollIndex((first: number) => {
+      console.info(first.toString())
+    })
+  }
+
+
+  /**
+   * 推荐位item
+   * @param item 推荐Bean
+   */
+  @Builder itemDraw(item: RecommendBean) {
+    Column() {
+      Image(item.searchImgUrl)
+        .width('100%')
+        .height((this.displayWidth - 30) / 2)
+
+      Text(item.productname)
+        .fontSize(17)
+        .fontColor('#333333')
+        .margin({ top: 10 })
+        .textOverflow({ overflow: TextOverflow.Ellipsis })
+        .width('100%')
+        .maxLines(2)
+        .textAlign(TextAlign.Start)
+        .padding({ left: 10, right: 10 })
+
+      Row() {
+        Text(`¥` + item.salePrice.priceDesc)
+          .fontSize(14)
+          .fontColor('#FF5C00')
+
+        Text(`销量` + item.saleCountDesc)
+          .fontSize(12)
+          .fontColor('#333333')
+      }.justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
+      .margin({ top: 2 })
+      .padding({ left: 10, right: 10 })
+    }
+    .width('100%')
+    .padding({ bottom: 10 })
+    .borderRadius(10)
+    .backgroundColor(Color.White)
+  }
+
+  @Builder LoadingLayout() {
+    RefreshLoadLayout({ loadBean: new RefreshLoadLayoutBean(true, $r('app.media.ic_pull_up_load'), '加载中...') })
+  }
+
+  @Builder FailLayout() {
+    RefreshFailLayout({
+      failBean: new FailLayoutBean(
+        $r('app.media.fail_img_layout'),
+        '您所在的机构还没有在蜂采平台开启商城采购哦，赶快联系平台管理员吧～',
+        '点击刷新',
+        (event: ClickEvent) => {
+          ToastUtil.showToast("===== " + event.toString())
+
+          this.viewModel.getRecommendProducts((list: Array<RecommendBean>) => {
+            this.pageState = PageState.Normal
+            this.list = list
+            ToastUtil.showToast("==== " + list.length)
+          })
+        })
+    })
+
   }
 }
 

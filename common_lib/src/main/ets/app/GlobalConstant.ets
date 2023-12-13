@@ -27,3 +27,9 @@ export class GlobalConstant {
    */
   static readonly SERVER_CODE_SUCCESS: number = 1;
 }
+
+export enum PageState {
+  Loading = 0,
+  Normal = 1,
+  Fail = 2,
+}
