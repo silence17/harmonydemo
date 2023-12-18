@@ -21,6 +21,7 @@ export struct MinePage {
   }
 
   /**
+   * 组件的声明周期 @Component
    * 仅首次创建的时候执行
    */
   aboutToAppear() {
@@ -31,14 +32,22 @@ export struct MinePage {
   }
 
   build() {
-    Column() {
-      //用户信息
-      UserInfoComponent({ userInfo: $userInfo })
-      //菜单
-      MineMenusComponents()
+
+    Stack() {
+      Image($r('app.media.bg_top_bg'))
+        .width('100%')
+
+      Column() {
+        //用户信息
+        UserInfoComponent({ userInfo: $userInfo })
+        //菜单
+        MineMenusComponents()
+      }.width('100%')
+      .height('100%')
+      .align(Alignment.Top)
     }.width('100%')
     .height('100%')
-    .align(Alignment.Top)
-    .backgroundColor($r('app.color.background_page'))
+    .backgroundColor('#F3F4F5')
+    .alignContent(Alignment.TopStart)
   }
 }

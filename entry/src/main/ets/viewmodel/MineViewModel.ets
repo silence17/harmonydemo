@@ -1,15 +1,43 @@
 import { UserInfoBean } from '@app/common_lib';
 import { ItemBean } from '../bean/ItemBean'
+import { IconBean } from '../bean/IconBean';
 
 export class MineViewModel {
   listSource: Array<ItemBean>
-  userInfo: UserInfoBean;
+  userInfo: UserInfoBean
+  orderStatusList: Array<IconBean>
 
   public initData() {
     this.getMenusList()
     this.getUserInfo()
+    this.getOrderStatusList()
   }
 
+  private getOrderStatusList() {
+
+    this.orderStatusList = [
+      {
+        id: '1',
+        iconUrl: $r('app.media.order_1'),
+        content: '待付款'
+      },
+      {
+        id: '2',
+        iconUrl: $r('app.media.order_2'),
+        content: '待发货'
+      },
+      {
+        id: '3',
+        iconUrl: $r('app.media.order_3'),
+        content: '待收货'
+      },
+      {
+        id: '4',
+        iconUrl: $r('app.media.order_4'),
+        content: '已完成'
+      }
+    ]
+  }
 
   private getMenusList() {
     this.listSource = [

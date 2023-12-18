@@ -32,7 +32,6 @@ export struct UserInfoComponent {
         .fontSize(18)
         .fontColor('#000000')
         .margin({ left: 12 })
-        .backgroundColor('0x0000ff')
         .height('100%')
         .align(Alignment.Center)
         .onClick((event) => {
@@ -44,9 +43,7 @@ export struct UserInfoComponent {
         .padding(15)
     }
     .size({ width: '100%', height: 150 })
-    .backgroundImage($r('app.media.srm_bg_main_mine'))
     .backgroundBlurStyle(BlurStyle.Thin)
-    .backgroundImageSize({ width: '100%', height: 150 })
     .alignItems(VerticalAlign.Top)
   }
 
