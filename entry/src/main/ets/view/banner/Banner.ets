@@ -62,7 +62,7 @@ export struct Banner {
       }, item => JSON.stringify(item))
     }
     .width(CommonConstants.PAGE_WIDTH)
-    .height(CommonConstants.HEIGHT_BANNER)
+    .height('100%')
     .index(this.index)
     .indicatorStyle({ selectedColor: $r('app.color.start_window_background') })
     .indicator(true)

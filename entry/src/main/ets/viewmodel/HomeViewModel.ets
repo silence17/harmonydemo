@@ -7,6 +7,8 @@ import promptAction from '@ohos.promptAction';
 import List from '@ohos.util.List';
 import ArrayList from '@ohos.util.ArrayList';
 import { RecommendBean } from '../bean/RecommendBean';
+import { IconBean } from '../bean/IconBean';
+import { BasicDataSource } from '../util/BasicDataSource';
 
 
 /**
@@ -15,11 +17,41 @@ import { RecommendBean } from '../bean/RecommendBean';
  * 3.发起请求
  * 4.处理结果
  */
-export class HomeViewModel {
-  private recommendList: Array<RecommendBean>
+export class HomeViewModel extends BasicDataSource {
+  private recommendList: Array<RecommendBean> = []
 
   public initData() {
   }
+
+  totalCount(): number {
+    return this.recommendList.length
+  }
+
+  getData(index: number): RecommendBean {
+    return this.recommendList[index]
+  }
+
+  addData(index: number, data: RecommendBean) {
+    this.recommendList.splice(index, 0, data)
+    this.notifyDataAdd(index)
+  }
+
+  pushData(data: RecommendBean) {
+    this.recommendList.push(data)
+    this.notifyDataAdd(this.recommendList.length - 1)
+  }
+
+
+  getIcons(): Array<IconBean> {
+    let icons = new Array<IconBean>()
+
+    icons.push(new IconBean('1', $r('app.media.icon_1'), '做保养'))
+    icons.push(new IconBean('1', $r('app.media.icon_1'), '换轮胎'))
+    icons.push(new IconBean('1', $r('app.media.icon'), '洗车美容'))
+    icons.push(new IconBean('1', $r('app.media.icon_1'), '精品加油'))
+    return icons
+  }
+
 
   getRecommendProducts(callback: Function) {
     let httpRequest = http.createHttp();
@@ -64,7 +96,10 @@ export class HomeViewModel {
         Log.info('cookies:' + JSON.stringify(data.cookies)); // 8+
 
         let resultJson: ResponseResult = JSON.parse(`${data.result}`);
-        this.recommendList = ((resultJson.data as any).list) //as List<RecommendBean>
+        let recommendList = ((resultJson.data as any).list) //as List<RecommendBean>
+        for (var index = 0; index < recommendList.length; index++) {
+          this.pushData(recommendList[index])
+        }
         callback(this.recommendList)
       } else {
         Log.info('error:' + JSON.stringify(err));

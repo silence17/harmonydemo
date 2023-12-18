@@ -25,10 +25,19 @@ import { RefreshLoadLayoutBean } from '@app/common_lib/src/main/ets/bean/Refresh
 import { PageState } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 import { RefreshFailLayout } from '@app/common_lib/src/main/ets/components/view/RefreshFailLayout';
 import { FailLayoutBean } from '@app/common_lib/src/main/ets/bean/FailLayoutBean';
+import { IconBean } from '../bean/IconBean';
+import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
 
 
 /**
  * home
+ *
+ * 特点：
+ * 1.使用LazyForEach 懒加载
+ *
+ * 遗留问题：
+ * 1.Grid 刷新问题
+ * 2.Scroll嵌套Grid，解决滑动冲突
  */
 @Preview
 @Component
@@ -36,15 +45,18 @@ export struct HomeComponent {
   private displayWidth: number = px2vp(display.getDefaultDisplaySync().width)
   //状态切换
   @State pageState: PageState = PageState.Loading
-  @State list: Array<RecommendBean> = new Array()
+  @State iconList: Array<IconBean> = new Array()
   @Provide viewModel: HomeViewModel = new HomeViewModel()
-  scrollerListener: Scroller = new Scroller()
+  private scrollerListener: Scroller = new Scroller()
 
   aboutToAppear() {
-    this.viewModel.getRecommendProducts((list: Array<RecommendBean>) => {
-      this.pageState = PageState.Fail
-      this.list = list
-      ToastUtil.showToast("==== " + list.length)
+    this.viewModel.getRecommendProducts((list?: Array<RecommendBean>) => {
+      //请求成功
+      if (list == null || list.length == 0) {
+        this.pageState = PageState.Fail
+      } else {
+        this.pageState = PageState.Normal
+      }
     })
   }
 
@@ -75,7 +87,6 @@ export struct HomeComponent {
       .align(Alignment.Start)
 
       Column() {
-
         if (this.pageState == PageState.Loading) {
           this.LoadingLayout()
         } else if (this.pageState == PageState.Normal) {
@@ -84,34 +95,100 @@ export struct HomeComponent {
           this.FailLayout()
         }
       }
-      .margin({ top: 45 })
+      .margin({ top: 55 })
     }.alignContent(Alignment.TopStart)
     .size({ width: '100%', height: '100%' })
     .backgroundColor('#F6F6F6')
   }
 
   @Builder normalDraw() {
-    Grid(this.scrollerListener) {
-
-      GridItem() {
-        Banner()
-      }.columnStart(1)
-      .columnEnd(2)
-
-      ForEach(this.list, (item: RecommendBean) => {
+    Stack() {
+      Grid(this.scrollerListener) {
+        //icon位
         GridItem() {
-          this.itemDraw(item)
+          this.IconLayout()
+        }.columnStart(1)
+        .columnEnd(2)
+
+        //轮播图
+        GridItem() {
+          Banner().height(100)
+        }.columnStart(1)
+        .columnEnd(2)
+
+        //商品推荐
+        GridItem() {
+          Column() {
+            Text('精选')
+              .width('100%')
+              .fontSize(15)
+              .fontColor('#333333')
+              .textAlign(TextAlign.Center)
+            Text('为您推荐')
+              .width('100%')
+              .fontSize(13)
+              .fontColor('#999999')
+              .textAlign(TextAlign.Center)
+          }
+        }.columnStart(1)
+        .columnEnd(2)
+
+        //Grid ForEach 循环加载
+        LazyForEach(this.viewModel, (item: RecommendBean) => {
+          GridItem() {
+            this.itemDraw(item)
+          }.backgroundColor('#F6F6F6')
+        })
+      }
+      .cachedCount(2)
+      .layoutWeight(1)
+      .columnsTemplate('1fr 1fr')
+      .columnsGap(10)
+      .rowsGap(10)
+      .width('100%')
+      .height('100%')
+      .padding(10)
+      .backgroundColor('#F3F4F5')
+      .onScrollIndex((first: number) => {
+        ToastUtil.showToast("==== " + first)
+      })
+
+      //返回顶部
+      Image($r('app.media.icon_go_top'))
+        .width(30)
+        .height(30)
+        .margin({ bottom: 50, right: 25 })
+        .onClick(() => {
+          //向上滚动100个单位
+          // this.scrollerListener.scrollTo(100)
+          this.scrollerListener.scrollEdge(0)
+        })
+    }.width('100%')
+    .height('100%')
+    .alignContent(Alignment.BottomEnd)
+  }
+
+  @Builder IconLayout() {
+    Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap }) {
+      ForEach(this.viewModel.getIcons(), (item: IconBean) => {
+        Column() {
+          Image(item.iconUrl)
+            .width('100%')
+            .height(44)
+            .objectFit(ImageFit.Contain)
+          Text(item.content)
+            .fontColor('#333333')
+            .width('100%')
+            .margin({ top: 5 })
+            .textAlign(TextAlign.Center)
         }
+        .width('25%')
       })
     }
-    .columnsTemplate('1fr 1fr')
-    .columnsGap(10)
-    .rowsGap(10)
+    .backgroundColor('#ffffff')
+    .padding({ top: 10, bottom: 10 })
+    .border({ radius: 10 })
     .width('100%')
-    .padding(10)
-    .onScrollIndex((first: number) => {
-      console.info(first.toString())
-    })
   }
 
 
@@ -124,34 +201,40 @@ export struct HomeComponent {
       Image(item.searchImgUrl)
         .width('100%')
         .height((this.displayWidth - 30) / 2)
+        .border({ radius: { topLeft: 10, topRight: 10 } })
 
-      Text(item.productname)
-        .fontSize(17)
-        .fontColor('#333333')
-        .margin({ top: 10 })
-        .textOverflow({ overflow: TextOverflow.Ellipsis })
-        .width('100%')
-        .maxLines(2)
-        .textAlign(TextAlign.Start)
-        .padding({ left: 10, right: 10 })
+      Stack() {
+        Text(item.productname)
+          .fontSize(17)
+          .fontColor('#333333')
+          .textOverflow({ overflow: TextOverflow.Ellipsis })
+          .width('100%')
+          .maxLines(2)
+          .textAlign(TextAlign.Start)
+      }.align(Alignment.TopStart)
+      .height(36)
+      .margin({ top: 10 })
+      .padding({ left: 10, right: 10 })
 
       Row() {
         Text(`¥` + item.salePrice.priceDesc)
           .fontSize(14)
           .fontColor('#FF5C00')
 
-        Text(`销量` + item.saleCountDesc)
-          .fontSize(12)
-          .fontColor('#333333')
+        if (!StringUtil.isEmpty(item.saleCountDesc)) {
+          Text(`销量` + item.saleCountDesc)
+            .fontSize(12)
+            .fontColor('#333333')
+        }
       }.justifyContent(FlexAlign.SpaceBetween)
       .width('100%')
-      .margin({ top: 2 })
+      .margin({ top: 5 })
       .padding({ left: 10, right: 10 })
     }
     .width('100%')
-    .padding({ bottom: 10 })
-    .borderRadius(10)
     .backgroundColor(Color.White)
+    .padding({ bottom: 10 })
+    .border({ radius: 10 })
   }
 
   @Builder LoadingLayout() {
@@ -169,7 +252,6 @@ export struct HomeComponent {
 
           this.viewModel.getRecommendProducts((list: Array<RecommendBean>) => {
             this.pageState = PageState.Normal
-            this.list = list
             ToastUtil.showToast("==== " + list.length)
           })
         })

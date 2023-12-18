@@ -5,5 +5,8 @@
   "main": "index.ets",
   "author": "",
   "license": "Apache-2.0",
-  "dependencies": {}
+  "dependencies": {
+    //依赖刷新组件
+    "@app/refresh": "file:./libs/refresh-1.0.0.har"
+  }
 }
