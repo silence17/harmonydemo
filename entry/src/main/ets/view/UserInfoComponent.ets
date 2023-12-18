@@ -3,20 +3,15 @@ import media from '@ohos.multimedia.media'
 import common from '@ohos.app.ability.common';
 import { UserUtil } from '../util/UserUtil';
 import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
+import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
 
 
 @Component
 export struct UserInfoComponent {
   @Link @Watch('onChange') userInfo: UserInfoBean
-  @State nickName: string = '登陆/注册'
 
   onChange() {
-    if (UserUtil.getInstance().isLogin()) {
-      this.nickName = this.userInfo.nickName
-    } else {
-      this.nickName = '登陆/注册';
-    }
-    Log.debug("UserInfoComponent.onChange ", this.userInfo.nickName)
+    Log.debug("UserInfoComponent.onChange " + this.userInfo.nickName)
   }
 
   build() {
@@ -24,27 +19,53 @@ export struct UserInfoComponent {
     Row() {
       Image($r('app.media.ic_user'))
         .objectFit(ImageFit.Contain)
-        .height('100%')
+        .height(58)
+        .width(58)
         .margin({ left: 10 })
         .width(66)
 
-      Text(this.nickName)
-        .fontSize(18)
-        .fontColor('#000000')
-        .margin({ left: 12 })
-        .height('100%')
-        .align(Alignment.Center)
-        .onClick((event) => {
-          this.jumpToLoginAbility()
-        })
+      if (StringUtil.isEmpty(this.userInfo.token)) {
+        this.notLoginView()
+      } else {
+        this.loginView()
+      }
+
       Blank().layoutWeight(1)
       Image($r('app.media.icon_setting'))
         .size({ width: 53, height: 53 })
         .padding(15)
     }
-    .size({ width: '100%', height: 150 })
+    .size({ width: '100%', height: 120 })
+    .padding({ top: 20, bottom: 20 })
     .backgroundBlurStyle(BlurStyle.Thin)
-    .alignItems(VerticalAlign.Top)
+    .alignItems(VerticalAlign.Center)
+  }
+
+
+  /**
+   * 登陆状态
+   */
+  @Builder loginView() {
+    Text(this.userInfo.nickName)
+      .fontSize(18)
+      .fontColor('#000000')
+      .margin({ left: 12 })
+      .backgroundColor('#00ff00')
+      .align(Alignment.Center)
+  }
+
+  /**
+   * 未登陆状态
+   */
+  @Builder notLoginView() {
+    Text('登陆/注册')
+      .fontSize(18)
+      .fontColor('#000000')
+      .margin({ left: 12 })
+      .align(Alignment.Center)
+      .onClick((event) => {
+        this.jumpToLoginAbility()
+      })
   }
 
   jumpToLoginAbility() {

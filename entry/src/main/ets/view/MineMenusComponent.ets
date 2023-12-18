@@ -23,12 +23,38 @@ export struct MineMenusComponents {
 
   build() {
     List({ space: 10 }) {
-
       ListItem() {
         Column() {
+          Row() {
+            Text('企业会员中心')
+              .fontSize(15)
+              .fontColor('#8C7111')
+              .layoutWeight(1)
+              .constraintSize({ minHeight: 22 })
+
+            Text('全部')
+              .fontWeight(FontWeight.Medium)
+              .fontSize(15)
+              .fontColor('#999999')
+              .constraintSize({ minHeight: 22 })
+            Image($r('app.media.icon_arrow2'))
+              .width(12)
+              .height(22)
+              .margin({ left: 5 })
+                // 保持原有尺寸显示。
+              .objectFit(ImageFit.None)
+          }
+          .backgroundImage($r('app.media.bg_mine_svip'))
+          .backgroundImageSize({ width: '100%', height: '100px' })
+          .justifyContent(FlexAlign.SpaceBetween)
+          .width('100%')
+          .padding({ left: 10, right: 10, top: 4 })
+          .height(50)
+          .alignItems(VerticalAlign.Top)
 
           this.initOrderLayout()
-        }.margin({ left: 10, right: 10 })
+        }
+        .margin({ left: 10, right: 10 })
       }
 
       ForEach(this.viewModel.listSource, (item: ItemBean) => {
@@ -112,6 +138,7 @@ export struct MineMenusComponents {
     .height(108)
     .border({ radius: 10 })
     .backgroundColor(Color.White)
+    .margin({ top: -20 })
     .padding({ top: 14, bottom: 14 })
   }
 }
