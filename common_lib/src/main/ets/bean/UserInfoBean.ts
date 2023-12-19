@@ -2,17 +2,17 @@ import { StringUtil } from '../utils/StringUtil'
 
 export class UserInfoBean {
   id: string
-  nickName?: string
-  username?: string
-  token?: string
-  cellPhone?: string
+  nickName: string = ''
+  username: string = ''
+  token: string = ''
+  cellPhone: string = ''
 
   constructor(id?: string, nickName?: string, userName?: string, cellPhone?: string, token?: string) {
-    this.id = id
-    this.username = userName
-    this.nickName = nickName
-    this.token = token
-    this.cellPhone = cellPhone
+    this.id = StringUtil.isEmpty(id) ? '' : id
+    this.username = StringUtil.isEmpty(userName) ? '' : userName
+    this.nickName = StringUtil.isEmpty(nickName) ? '' : nickName
+    this.token = StringUtil.isEmpty(token) ? '' : token
+    this.cellPhone = StringUtil.isEmpty(cellPhone) ? '' : cellPhone
   }
 
   /**

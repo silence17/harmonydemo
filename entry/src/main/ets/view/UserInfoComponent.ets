@@ -34,6 +34,11 @@ export struct UserInfoComponent {
       Image($r('app.media.icon_setting'))
         .size({ width: 53, height: 53 })
         .padding(15)
+        .align(Alignment.Top)
+      // .alignRules({
+      //   right: { anchor: '__container__', align: HorizontalAlign.End },
+      //   top: { anchor: '__container__', align: VerticalAlign.Top }
+      // })
     }
     .size({ width: '100%', height: 120 })
     .padding({ top: 20, bottom: 20 })
@@ -50,7 +55,6 @@ export struct UserInfoComponent {
       .fontSize(18)
       .fontColor('#000000')
       .margin({ left: 12 })
-      .backgroundColor('#00ff00')
       .align(Alignment.Center)
   }
 
