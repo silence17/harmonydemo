@@ -22,7 +22,7 @@ export struct UserInfoComponent {
         .objectFit(ImageFit.Contain)
         .height(58)
         .width(58)
-        .margin({ left: 10, top: 24 })
+        .margin({ left: 10, top: 30 })
         .alignRules({
           top: { anchor: "__container__", align: VerticalAlign.Top },
           left: { anchor: "__container__", align: HorizontalAlign.Start }
@@ -67,7 +67,7 @@ export struct UserInfoComponent {
     Text(this.userInfo.nickName)
       .fontSize(18)
       .fontColor('#333333')
-      .margin({ left: 12, top: 38 })
+      .margin({ left: 12, top: 46 })
       .fontWeight(FontWeight.Medium)
       .align(Alignment.Center)
       .alignRules({
@@ -98,7 +98,7 @@ export struct UserInfoComponent {
       left: { anchor: '__container__', align: HorizontalAlign.Start },
       top: { anchor: '__container__', align: VerticalAlign.Top },
     })
-    .margin({ top: 40 })
+    .margin({ top: 46 })
     .id('not_login')
   }
 
