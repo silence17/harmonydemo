@@ -47,15 +47,23 @@ export class MineViewModel {
       {
         id: 2,
         type: 2,
-        icon: $r('app.media.icon_call_server'),
-        title: '联系客服',
+        icon: $r('app.media.icon_address'),
+        title: '收货地址',
         rightIcon: $r('app.media.icon_right_arrow')
       },
       {
         id: 3,
-        type: 1,
-        icon: null,
-        title: '退出登陆',
+        type: 2,
+        icon: $r('app.media.icon_coupone'),
+        title: '优惠券',
+        rightIcon: $r('app.media.icon_right_arrow')
+      },
+      {
+        id: 4,
+        type: 2,
+        icon: $r('app.media.icon_call_server'),
+        title: '核销码',
+        rightIcon: $r('app.media.icon_right_arrow')
       }
     ]
   }

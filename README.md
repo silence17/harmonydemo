@@ -78,4 +78,8 @@
 2. 使用@Provide注释夸组件传递变量时，配对注解@Consume必须与@Provide在同一个文件中
 
 
+布局中注意事项：
+1. RelativeContainer中不声明id属性，会不显示view
+
+
 
