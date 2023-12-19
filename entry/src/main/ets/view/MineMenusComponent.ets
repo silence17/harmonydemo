@@ -19,78 +19,88 @@ export struct MineMenusComponent {
   }
 
   build() {
-    List({ space: 10 }) {
-      ListItem() {
-        Column() {
-          Row() {
-            Text('企业会员中心')
-              .fontSize(15)
-              .fontColor('#8C7111')
-              .layoutWeight(1)
-              .constraintSize({ minHeight: 22 })
+    Column() {
+      Row() {
+        Text('企业会员中心')
+          .fontSize(15)
+          .fontColor('#8C7111')
+          .layoutWeight(1)
+          .constraintSize({ minHeight: 22 })
 
-            Text('全部')
-              .fontWeight(FontWeight.Medium)
-              .fontSize(15)
-              .fontColor('#999999')
-              .constraintSize({ minHeight: 22 })
-            Image($r('app.media.icon_arrow2'))
-              .width(12)
-              .height(22)
-              .margin({ left: 5 })
-                // 保持原有尺寸显示。
-              .objectFit(ImageFit.None)
-          }
-          .backgroundImage($r('app.media.bg_mine_svip'))
-          .backgroundImageSize({ width: '100%', height: '100px' })
-          .justifyContent(FlexAlign.SpaceBetween)
-          .width('100%')
-          .padding({ left: 10, right: 10, top: 4 })
-          .height(50)
-          .alignItems(VerticalAlign.Top)
-
-          this.initOrderLayout()
-        }
-        .margin({ left: 10, right: 10 })
+        Text('全部')
+          .fontWeight(FontWeight.Medium)
+          .fontSize(15)
+          .fontColor('#999999')
+          .constraintSize({ minHeight: 22 })
+        Image($r('app.media.icon_arrow2'))
+          .width(12)
+          .height(22)
+          .margin({ left: 5 })
+            // 保持原有尺寸显示。
+          .objectFit(ImageFit.None)
       }
+      .backgroundImage($r('app.media.bg_mine_svip'))
+      .backgroundImageSize({ width: '100%', height: '100px' })
+      .justifyContent(FlexAlign.SpaceBetween)
+      .width('100%')
+      .padding({ left: 10, right: 10, top: 4 })
+      .height(50)
+      .alignItems(VerticalAlign.Top)
 
-      ForEach(this.viewModel.getMenusList(), (item: ItemBean) => {
-        ListItem() {
-          Row() {
-            if (item.icon != null) {
-              Image(item?.icon).width(23).height(23).margin({ right: 6 })
+      //订单模块
+      this.initOrderLayout()
+
+      List() {
+        ForEach(this.viewModel.getMenusList(), (item: ItemBean) => {
+          ListItem() {
+            Row() {
+              if (item.icon != null) {
+                Image(item?.icon).width(23).height(23).margin({ right: 6 })
+              }
+              Text(item.title).fontSize(12).fontColor('#333333')
+              Blank().layoutWeight(1)
+              if (item.rightIcon != null) {
+                Image(item.rightIcon).width(7).height(11)
+              }
             }
-            Text(item.title).fontSize(12).fontColor('#333333')
-            Blank().layoutWeight(1)
-            if (item.rightIcon != null) {
-              Image(item.rightIcon).width(7).height(11)
-            }
+            .width('100%')
+            .height(45)
+            .padding({ left: 10, right: 10 })
           }
-          .width('100%')
-          .height(45)
-          .padding({ left: 10, right: 10 })
-        }
-        .borderRadius(12)
-        .margin({ left: 10, right: 10 })
-        .backgroundColor(Color.White)
-        .onClick((event) => {
-          switch (item.id) {
-            case 3:
+          .onClick((event) => {
+            switch (item.id) {
+              default:
+                ToastUtil.showToast("===== " + item.title)
+                break;
+            }
+          })
+        }, (item: ItemBean) => JSON.stringify(item))
+      }
+      .width('100%')
+      .margin({ top: 10 })
+      .border({ radius: 10 })
+      .backgroundColor(Color.White)
+
+      //退出登陆
+      Row() {
+        Text('退出登陆')
+          .fontSize(12)
+          .fontColor('#333333')
+          .onClick(() => {
             //登陆成功回调
-              UserUtil.getInstance().setUserInfo(new UserInfoBean())
-              AppStorage.Set<string>(CACHE_USER_INFO, '');
-              ToastUtil.showToast('退出登陆成功')
-              break;
-            default:
-              ToastUtil.showToast("===== " + item.title)
-              break;
-          }
-        })
-      }, (item: ItemBean) => JSON.stringify(item))
-    }
-    .margin({ left: 10, right: 10 })
-    .width('100%')
-    .height('100%')
+            UserUtil.getInstance().setUserInfo(new UserInfoBean())
+            AppStorage.Set<string>(CACHE_USER_INFO, '');
+            ToastUtil.showToast('退出登陆成功')
+          })
+      }
+      .width('100%')
+      .height(45)
+      .border({ radius: 10 })
+      .margin({ top: 20 })
+      .backgroundColor(Color.White)
+      .padding({ left: 10, right: 10 })
+
+    }.margin({ left: 10, right: 10 })
   }
 
   @Builder initOrderLayout() {
