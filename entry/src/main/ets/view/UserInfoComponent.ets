@@ -5,10 +5,11 @@ import { UserUtil } from '../util/UserUtil';
 import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
 import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
 
-
+// @Preview
 @Component
 export struct UserInfoComponent {
   @Link @Watch('onChange') userInfo: UserInfoBean
+  // private userInfo: UserInfoBean = new UserInfoBean()
 
   onChange() {
     Log.debug("UserInfoComponent.onChange " + this.userInfo.nickName)
@@ -16,34 +17,46 @@ export struct UserInfoComponent {
 
   build() {
     //用户信息
-    Row() {
+    RelativeContainer() {
       Image($r('app.media.ic_user'))
         .objectFit(ImageFit.Contain)
         .height(58)
         .width(58)
-        .margin({ left: 10 })
-        .width(66)
+        .margin({ left: 10, top: 24 })
+        .alignRules({
+          top: { anchor: "__container__", align: VerticalAlign.Top },
+          left: { anchor: "__container__", align: HorizontalAlign.Start }
+        })
+        .id("header_img")
 
-      if (StringUtil.isEmpty(this.userInfo.token)) {
-        this.notLoginView()
-      } else {
-        this.loginView()
+      RelativeContainer() {
+        if (StringUtil.isEmpty(this.userInfo.token)) {
+          this.notLoginView()
+        } else {
+          this.loginView()
+        }
       }
+      .height('100%')
+      .alignRules({
+        top: { anchor: "__container__", align: VerticalAlign.Top },
+        bottom: { anchor: "__container__", align: VerticalAlign.Bottom },
+        left: { anchor: "header_img", align: HorizontalAlign.End },
+        right: { anchor: "icon_setting", align: HorizontalAlign.Start },
+      })
+      .id('change_container')
 
-      Blank().layoutWeight(1)
       Image($r('app.media.icon_setting'))
-        .size({ width: 53, height: 53 })
-        .padding(15)
+        .size({ width: 40, height: 40 })
+        .padding(9)
         .align(Alignment.Top)
-      // .alignRules({
-      //   right: { anchor: '__container__', align: HorizontalAlign.End },
-      //   top: { anchor: '__container__', align: VerticalAlign.Top }
-      // })
+        .id('icon_setting')
+        .alignRules({
+          right: { anchor: '__container__', align: HorizontalAlign.End },
+          top: { anchor: '__container__', align: VerticalAlign.Top }
+        })
     }
     .size({ width: '100%', height: 120 })
-    .padding({ top: 20, bottom: 20 })
     .backgroundBlurStyle(BlurStyle.Thin)
-    .alignItems(VerticalAlign.Center)
   }
 
 
@@ -53,23 +66,40 @@ export struct UserInfoComponent {
   @Builder loginView() {
     Text(this.userInfo.nickName)
       .fontSize(18)
-      .fontColor('#000000')
-      .margin({ left: 12 })
+      .fontColor('#333333')
+      .margin({ left: 12, top: 38 })
+      .fontWeight(FontWeight.Medium)
       .align(Alignment.Center)
+      .alignRules({
+        left: { anchor: '__container__', align: HorizontalAlign.Start },
+        top: { anchor: '__container__', align: VerticalAlign.Top },
+      })
+      .id('login_nickname')
   }
 
   /**
    * 未登陆状态
    */
   @Builder notLoginView() {
-    Text('登陆/注册')
-      .fontSize(18)
-      .fontColor('#000000')
-      .margin({ left: 12 })
-      .align(Alignment.Center)
-      .onClick((event) => {
-        this.jumpToLoginAbility()
-      })
+    Row() {
+      Text('登陆/注册')
+        .fontSize(16)
+        .fontColor('#333333')
+        .margin({ left: 12 })
+        .align(Alignment.Center)
+        .onClick((event) => {
+          this.jumpToLoginAbility()
+        })
+      Image($r('app.media.icon_right_arrow'))
+        .width(7)
+        .height(11)
+        .margin({ left: 5 })
+    }.alignRules({
+      left: { anchor: '__container__', align: HorizontalAlign.Start },
+      top: { anchor: '__container__', align: VerticalAlign.Top },
+    })
+    .margin({ top: 40 })
+    .id('not_login')
   }
 
   jumpToLoginAbility() {
