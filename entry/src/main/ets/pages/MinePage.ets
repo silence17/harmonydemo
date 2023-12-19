@@ -1,16 +1,19 @@
 import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
-import { MineMenusComponents } from '../view/MineMenusComponent';
 import { UserInfoComponent } from '../view/UserInfoComponent';
+import { MineMenusComponent } from '../view/MineMenusComponent';
 import { MineViewModel } from '../viewmodel/MineViewModel';
 import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
 import { CACHE_USER_INFO, GlobalConstant } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 import { Log } from '@app/common_lib';
 
+/**
+ * //@Provide和@Consume可以通过相同的变量名或者相同的变量别名绑定，变量类型必须相同。
+ */
 @Preview
 @Component
 export struct MinePage {
-  @Provide viewModel: MineViewModel = new MineViewModel()
   @StorageProp(CACHE_USER_INFO) @Watch('onLoginChange') userJson: string = ''
+  @State viewModel: MineViewModel = new MineViewModel()
   @State userInfo: UserInfoBean = new UserInfoBean()
 
   onLoginChange() {
@@ -43,7 +46,7 @@ export struct MinePage {
         //用户信息
         UserInfoComponent({ userInfo: $userInfo })
         //菜单
-        MineMenusComponents()
+        MineMenusComponent({ viewModel: $viewModel })
       }.width('100%')
       .height('100%')
       .align(Alignment.TopStart)

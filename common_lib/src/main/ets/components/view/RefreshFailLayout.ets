@@ -4,8 +4,7 @@ import { RefreshLoadLayoutBean } from '../../bean/RefreshLoadLayoutBean'
 @Component
 export struct RefreshFailLayout {
   //状态变化监听
-  @ObjectLink
-  failBean: FailLayoutBean;
+  @ObjectLink failBean: FailLayoutBean;
 
   build() {
     Column() {

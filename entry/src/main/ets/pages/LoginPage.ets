@@ -17,6 +17,7 @@ import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant
 /**
  * 组件入口，主组件
  */
+@Preview
 @Entry
 @Component
 struct LoginPage {

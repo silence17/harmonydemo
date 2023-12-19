@@ -1,5 +1,4 @@
 import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil'
-import promptAction from '@ohos.promptAction'
 import { ItemBean } from '../bean/ItemBean'
 import { MineViewModel } from '../viewmodel/MineViewModel'
 import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant'
@@ -11,14 +10,12 @@ import { IconBean } from '../bean/IconBean'
 /**
  * 我的， 菜单组件
  */
-@Preview
 @Component
-export struct MineMenusComponents {
-  @Consume viewModel: MineViewModel
+export struct MineMenusComponent {
+  @Link viewModel: MineViewModel
   private screenWidth: number = px2vp(display.getDefaultDisplaySync().width)
 
   aboutToAppear() {
-
   }
 
   build() {
@@ -57,7 +54,7 @@ export struct MineMenusComponents {
         .margin({ left: 10, right: 10 })
       }
 
-      ForEach(this.viewModel.listSource, (item: ItemBean) => {
+      ForEach(this.viewModel.getMenusList(), (item: ItemBean) => {
         ListItem() {
           Row() {
             if (item.icon != null) {

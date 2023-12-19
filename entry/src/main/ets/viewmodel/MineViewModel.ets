@@ -3,18 +3,15 @@ import { ItemBean } from '../bean/ItemBean'
 import { IconBean } from '../bean/IconBean';
 
 export class MineViewModel {
-  listSource: Array<ItemBean>
-  userInfo: UserInfoBean
-  orderStatusList: Array<IconBean>
+  userInfo: UserInfoBean = new UserInfoBean()
+  orderStatusList: Array<IconBean> = []
 
   public initData() {
-    this.getMenusList()
     this.getUserInfo()
     this.getOrderStatusList()
   }
 
-  private getOrderStatusList() {
-
+  getOrderStatusList() {
     this.orderStatusList = [
       {
         id: '1',
@@ -39,8 +36,8 @@ export class MineViewModel {
     ]
   }
 
-  private getMenusList() {
-    this.listSource = [
+  getMenusList(): Array<ItemBean> {
+    return [
       {
         id: 1,
         type: 1,

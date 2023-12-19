@@ -1,5 +1,4 @@
 //用@Preview装饰的自定义组件可以在DevEco Studio的预览器上进行实时预览，加载页面时，将创建并显示@Preview装饰的自定义组件。
-@Preview
 @Component
 export struct ClearEditText {
   @Link content: string

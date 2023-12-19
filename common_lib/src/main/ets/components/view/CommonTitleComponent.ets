@@ -20,7 +20,7 @@ import { Log } from '../../utils/Log/Log';
 
 @Component
 export struct CommonTitleComponent {
-  title: Resource = $r('app.string.default_str');
+  title: Resource = $r('app.string.empty_str');
   rightContent: string = ''
   //右侧菜单点击回调
   callback: Function
