@@ -22,12 +22,14 @@ import ArrayList from '@ohos.util.ArrayList';
 import { Banner } from '../view/banner/Banner';
 import { RefreshLoadLayout } from '@app/common_lib/src/main/ets/components/view/RefreshLoadLayout';
 import { RefreshLoadLayoutBean } from '@app/common_lib/src/main/ets/bean/RefreshLoadLayoutBean';
+import { JumpAbility } from '@app/common_lib/src/main/ets/utils/JumpAbility';
 import { PageState } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 import { RefreshFailLayout } from '@app/common_lib/src/main/ets/components/view/RefreshFailLayout';
 import { FailLayoutBean } from '@app/common_lib/src/main/ets/bean/FailLayoutBean';
 import { IconBean } from '../bean/IconBean';
 import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
-
+import { CountEditText } from '@app/common_lib/src/main/ets/components/view/CountEditText';
+import { UserUtil } from '../util/UserUtil';
 
 /**
  * home
@@ -230,8 +232,34 @@ export struct HomeComponent {
       .width('100%')
       .margin({ top: 5 })
       .padding({ left: 10, right: 10 })
+
+      Row() {
+        CountEditText({
+          content: 1,
+          callback: (value: number) => {
+            item.quantity = value
+          }
+        })
+          .width(90)
+          .height(22)
+          .margin({ top: 8, right: 10 })
+
+        Image($r('app.media.icon_shopcart'))
+          .width(22)
+          .height(22)
+          .margin({ right: 10 })
+          .onClick(() => {
+
+            if (UserUtil.getInstance().isLogin()) {
+              this.viewModel.addCart(item.productid, item.quantity, item.selectSkuDTO.skuId)
+            } else {
+              JumpAbility.jumpToLoginAbility()
+            }
+          })
+      }
     }
     .width('100%')
+    .alignItems(HorizontalAlign.End)
     .backgroundColor(Color.White)
     .padding({ bottom: 10 })
     .border({ radius: 10 })

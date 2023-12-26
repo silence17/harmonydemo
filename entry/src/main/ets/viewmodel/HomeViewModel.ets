@@ -114,4 +114,66 @@ export class HomeViewModel extends BasicDataSource {
       httpRequest.destroy();
     })
   }
+
+
+  /**
+   * 添加购物车
+   * @param productId product id
+   * @param quantity 数量
+   * @param skuId sku id
+   */
+  addCart(productId: string, quantity: number, skuId: string) {
+    let httpRequest = http.createHttp();
+
+    httpRequest.on('headersReceive', (header) => {
+      Log.debug('header: ' + JSON.stringify(header))
+    })
+    httpRequest.request("https://test.beeselect.net/j/api/cart/add", {
+      method: http.RequestMethod.POST,
+      header: {
+        'Content-Type': 'application/json',
+        "token": UserUtil.getInstance().getUserInfo().token,
+        "Authorization": "",
+        "platform": "2",
+        "applicationCode": "3",
+        "version": "3.2.1",
+        "fromSource": "3.2.1",
+        "businessType": "1",
+      },
+      //{addQuantity: 1, pageFromCode: 3, productId: "942", skuId: "942_2876_0_0"}
+      extraData: {
+        "productId": productId,
+        "addQuantity": quantity,
+        "pageFromCode": 3,
+        "skuId": skuId,
+      },
+      expectDataType: http.HttpDataType.STRING, // 可选，指定返回数据的类型
+      usingCache: true, // 可选，默认为true
+      priority: 1, // 可选，默认为1
+      connectTimeout: 60000, // 可选，默认为60000ms
+      readTimeout: 60000, // 可选，默认为60000ms
+      usingProtocol: http.HttpProtocol.HTTP1_1, // 可选，协议类型默认值由系统自动指定
+    }, (err, data) => {
+
+      if (data.responseCode === http.ResponseCode.OK) {
+        console.info('Result:' + data.result);
+        console.info('code:' + data.responseCode);
+      }
+      if (!err) {
+        // data.result为HTTP响应内容，可根据业务需要进行解析
+        Log.info('Result:' + JSON.stringify(data.result));
+        ToastUtil.showToast("加车成功")
+      } else {
+        Log.info('error:' + JSON.stringify(err));
+        promptAction.showToast({
+          message: JSON.stringify(err),
+          duration: 2000
+        })
+      }
+      // 取消订阅HTTP响应头事件
+      httpRequest.off('headersReceive');
+      // 当该请求使用完毕时，调用destroy方法主动销毁
+      httpRequest.destroy();
+    })
+  }
 }

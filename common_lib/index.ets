@@ -11,6 +11,8 @@ export { CommonTitleComponent } from './src/main/ets/components/view/CommonTitle
 
 export { ClearEditText } from './src/main/ets/components/view/ClearEditText'
 
+export { CountEditText } from './src/main/ets/components/view/CountEditText'
+
 export { ToastUtil } from './src/main/ets/utils/ToastUtil'
 
 export { StringUtil } from './src/main/ets/utils/StringUtil'
@@ -34,3 +36,5 @@ export { RefreshController } from '@app/refresh/src/main/ets/controller/RefreshC
 export { GridView } from '@app/refresh/src/main/ets/GridView'
 
 export { ListView } from '@app/refresh/src/main/ets/ListView'
+
+export { JumpAbility } from './src/main/ets/utils/JumpAbility'
