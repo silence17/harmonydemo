@@ -24,6 +24,7 @@ import dataPreferences from '@ohos.data.preferences';
 import preferences from '@ohos.data.preferences';
 import deviceInfo from '@ohos.deviceInfo';
 import promptAction from '@ohos.promptAction';
+import TreeMap from '@ohos.util.TreeMap';
 
 /**
  * UIAbility 相当于Android Activity
@@ -32,7 +33,6 @@ import promptAction from '@ohos.promptAction';
  */
 export default class EntryAbility extends UIAbility {
   public TAG: string = "EntryAbility";
-
 
 
   /**
@@ -96,6 +96,7 @@ export default class EntryAbility extends UIAbility {
     hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageCreate');
 
+    //为当前WindowStage的主窗口加载具体页面。
     //在onWindowStageCreate()回调中通过loadContent()方法设置应用要加载的页面并根据需要订阅WindowStage的事件（获焦/失焦、可见/不可见）。
     windowStage.loadContent('pages/MainPage', (err, data) => {
       if (err.code) {
@@ -106,6 +107,20 @@ export default class EntryAbility extends UIAbility {
       hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.INFO);
       hilog.info(0x0000, 'testTag', 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');
     });
+
+    //模拟器会导致顶部留白。待真机验证
+    // windowStage.getMainWindow((error, window) => {
+    //   // 全屏样式
+    //   window.setWindowLayoutFullScreen(true, (err) => {
+    //     if (err.code) {
+    //       console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+    //       return;
+    //     }
+    //     console.info('Succeeded in setting the window layout to full-screen mode.');
+    //   })
+    //   // 设置导航栏、状态栏不显示，从而达到沉浸式效果
+    //   window.setWindowSystemBarEnable(['navigation'])
+    // })
   }
 
 

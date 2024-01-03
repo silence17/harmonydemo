@@ -10,7 +10,7 @@
     },
     {
       "name": "entryAbility_label",
-      "value": "RankingDemo"
+      "value": "HarmonyTest"
     },
     {
       "name": "page_type",
@@ -79,6 +79,10 @@
     {
       "name": "LoginAbility_label",
       "value": "label"
+    },
+    {
+      "name": "login_title",
+      "value": "登陆/注册"
     }
   ]
 }

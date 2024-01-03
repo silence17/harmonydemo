@@ -31,7 +31,7 @@ export const NavList: NavItem[] = [
 
   new NavItem(
     TabId.ACHIEVEMENT,
-    '发现',
+    '购物车',
     $r('app.media.ic_tabs_achievement_normal'),
     $r('app.media.ic_tabs_achievement_sel')
   ),

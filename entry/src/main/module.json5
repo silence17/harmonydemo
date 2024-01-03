@@ -26,6 +26,7 @@
         "description": "$string:entryAbility_desc",
         //应用图标.需要在主入口中配置
         "icon": "$media:icon",
+        //配置应用名称
         "label": "$string:entryAbility_label",
         // UIAbility组件启动页面图标资源文件的索引
         "startWindowIcon": "$media:icon",

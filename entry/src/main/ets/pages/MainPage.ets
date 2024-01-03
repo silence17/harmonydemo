@@ -4,6 +4,8 @@ import promptAction from '@ohos.promptAction';
 import { MinePage } from './MinePage';
 import { NavList, TabId } from '../model/NavDataModel';
 import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant';
+import { ShopCartPage } from './ShopCartPage';
+import window from '@ohos.window';
 
 PersistentStorage.PersistProp<string>(CACHE_USER_INFO, '')
 
@@ -58,8 +60,8 @@ struct MainPage {
       }.tabBar(this.TabBuilder(TabId.HOME))
 
       TabContent() {
-        Text('second page')
-          .fontSize(30)
+        ShopCartPage()
+          .size({ width: '100%', height: '100%' })
       }.tabBar(this.TabBuilder(TabId.ACHIEVEMENT))
 
       TabContent() {
