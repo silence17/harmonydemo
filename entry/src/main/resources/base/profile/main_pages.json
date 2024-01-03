@@ -4,6 +4,7 @@
     "pages/TestPage",
     "pages/NavigationExamplePage",
     "pages/MainPage",
-    "pages/LoginPage"
+    "pages/LoginPage",
+    "pages/SplashPage"
   ]
 }

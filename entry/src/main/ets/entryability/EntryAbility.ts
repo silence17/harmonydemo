@@ -98,7 +98,7 @@ export default class EntryAbility extends UIAbility {
 
     //为当前WindowStage的主窗口加载具体页面。
     //在onWindowStageCreate()回调中通过loadContent()方法设置应用要加载的页面并根据需要订阅WindowStage的事件（获焦/失焦、可见/不可见）。
-    windowStage.loadContent('pages/MainPage', (err, data) => {
+    windowStage.loadContent('pages/SplashPage', (err, data) => {
       if (err.code) {
         hilog.isLoggable(0x0000, 'testTag', hilog.LogLevel.ERROR);
         hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');
@@ -109,18 +109,32 @@ export default class EntryAbility extends UIAbility {
     });
 
     //模拟器会导致顶部留白。待真机验证
-    // windowStage.getMainWindow((error, window) => {
-    //   // 全屏样式
-    //   window.setWindowLayoutFullScreen(true, (err) => {
-    //     if (err.code) {
-    //       console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
-    //       return;
-    //     }
-    //     console.info('Succeeded in setting the window layout to full-screen mode.');
-    //   })
-    //   // 设置导航栏、状态栏不显示，从而达到沉浸式效果
-    //   window.setWindowSystemBarEnable(['navigation'])
-    // })
+    windowStage.getMainWindow((error, window) => {
+      var systemBarProperties = {
+        //状态栏背景颜色
+        //statusBarColor: '#ff00ff',
+        //导航栏背景颜色
+        //navigationBarColor: '#00ff00',
+        //以下两个属性从API Version7开始支持
+        //状态栏图标是否为高亮状态。true表示高亮
+        isStatusBarLightIcon: true,
+        //状态栏文字颜色。当设置此属性后， isStatusBarLightIcon属性设置无效。默认值：0xE5FFFFFF
+        statusBarContentColor: '0xE5FFFFFF',
+        //导航栏图标是否为高亮状态。true表示高亮
+        isNavigationBarLightIcon: false
+      };
+      window.setWindowSystemBarProperties(systemBarProperties)
+      //   // 全屏样式
+      //   window.setWindowLayoutFullScreen(true, (err) => {
+      //     if (err.code) {
+      //       console.error('Failed to set the window layout to full-screen mode. Cause:' + JSON.stringify(err));
+      //       return;
+      //     }
+      //     console.info('Succeeded in setting the window layout to full-screen mode.');
+      //   })
+      //   // 设置导航栏、状态栏不显示，从而达到沉浸式效果
+      //   window.setWindowSystemBarEnable(['navigation'])
+    })
   }
 
 

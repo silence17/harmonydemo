@@ -1,6 +1,4 @@
 // module中会生成这个文件，对外可访问的文件在此配置
-export { MainPage } from './src/main/ets/components/mainpage/MainPage'
-
 export { Log } from './src/main/ets/utils/Log/Log'
 
 export { LogOptions } from './src/main/ets/utils/Log/LogOptions'

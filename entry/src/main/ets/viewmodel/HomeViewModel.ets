@@ -87,26 +87,26 @@ export class HomeViewModel extends BasicDataSource {
       if (data.responseCode === http.ResponseCode.OK) {
         console.info('Result:' + data.result);
         console.info('code:' + data.responseCode);
-      }
-      if (!err) {
-        // data.result为HTTP响应内容，可根据业务需要进行解析
-        Log.info('Result:' + JSON.stringify(data.result));
-        // data.header为HTTP响应头，可根据业务需要进行解析
-        Log.info('header:' + JSON.stringify(data.header));
-        Log.info('cookies:' + JSON.stringify(data.cookies)); // 8+
 
-        let resultJson: ResponseResult = JSON.parse(`${data.result}`);
-        let recommendList = ((resultJson.data as any).list) //as List<RecommendBean>
-        for (var index = 0; index < recommendList.length; index++) {
-          this.pushData(recommendList[index])
+        if (!err) {
+          // data.result为HTTP响应内容，可根据业务需要进行解析
+          Log.info('Result:' + JSON.stringify(data.result));
+          // data.header为HTTP响应头，可根据业务需要进行解析
+          Log.info('header:' + JSON.stringify(data.header));
+          Log.info('cookies:' + JSON.stringify(data.cookies)); // 8+
+
+          let resultJson: ResponseResult = JSON.parse(`${data.result}`);
+          let recommendList = ((resultJson.data as any).list) //as List<RecommendBean>
+          for (var index = 0; index < recommendList.length; index++) {
+            this.pushData(recommendList[index])
+          }
+          callback(this.recommendList)
+        } else {
+          Log.info('error:' + JSON.stringify(err));
+          ToastUtil.showToast(JSON.stringify(err))
         }
-        callback(this.recommendList)
       } else {
-        Log.info('error:' + JSON.stringify(err));
-        promptAction.showToast({
-          message: JSON.stringify(err),
-          duration: 2000
-        })
+        ToastUtil.showToast('网络异常')
       }
       // 取消订阅HTTP响应头事件
       httpRequest.off('headersReceive');
