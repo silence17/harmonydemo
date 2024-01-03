@@ -9,7 +9,10 @@ import window from '@ohos.window';
 @Component
 struct SplashPage {
   onPageShow() {
-    //模拟器会导致顶部留白。待真机验证
+    //todo 模拟器会导致顶部留白。待真机验证
+    //Window：当前窗口实例，窗口管理器管理的基本单元。
+    //WindowStage：窗口管理器。管理各个基本窗口单元。
+    //获取当前应用内最后显示的窗口，使用callback异步回调。ctx:当前应用上下文信息。callback:回调函数。返回当前应用内最后显示的窗口对象。
     window.getLastWindow(getContext(this), (err, window) => {
       // 全屏样式
       window.setWindowLayoutFullScreen(true)
@@ -60,7 +63,7 @@ struct SplashPage {
           .fontColor('#333333')
           .margin({ top: 5 })
       }
-      .id('conteiner')
+      .id('container')
       .margin({ bottom: 120 })
       .alignRules({
         bottom: { anchor: '__container__', align: VerticalAlign.Bottom },
