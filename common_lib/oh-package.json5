@@ -1,12 +1,13 @@
 {
+  "license": "Apache-2.0",
+  "devDependencies": {},
+  "author": "",
   "name": "common_lib",
-  "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "index.ets",
-  "author": "",
-  "license": "Apache-2.0",
+  "version": "1.0.0",
   "dependencies": {
-    //依赖刷新组件
-    "@app/refresh": "file:./libs/refresh-1.0.0.har"
+    "@app/refresh": "file:./libs/refresh-1.0.0.har",
+    "@ohos/lottie": "^2.0.0"
   }
 }

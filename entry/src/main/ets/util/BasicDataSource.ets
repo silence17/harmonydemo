@@ -1,6 +1,6 @@
 import { Log } from '@app/common_lib/src/main/ets/utils/Log/Log';
 
-export class BasicDataSource implements IDataSource {
+export class BasicDataSource<T> implements IDataSource {
   private listeners: DataChangeListener[] = []
 
 
@@ -16,7 +16,7 @@ export class BasicDataSource implements IDataSource {
    * 获取索引值对应的数据
    * @param index
    */
-  getData(index: number) {
+  getData(index: number): T {
     throw undefined;
   }
 

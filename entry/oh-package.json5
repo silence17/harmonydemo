@@ -1,14 +1,12 @@
 {
   "license": "",
+  "devDependencies": {},
   "author": "",
   "name": "entry",
   "description": "Please describe the basic information.",
   "main": "",
   "version": "1.0.0",
-  "devDependencies": {},
-  //引来的代码库
   "dependencies": {
-    //引用静态共享包,引用本地模块
     "@app/common_lib": "file:../common_lib"
   }
 }

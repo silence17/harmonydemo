@@ -1,4 +1,4 @@
-import { Log, PreferencesUtil, ResponseResult, ToastUtil, UserInfoBean } from '@app/common_lib';
+import { Log, PreferencesUtil, ResponseResult, StringUtil, ToastUtil, UserInfoBean } from '@app/common_lib';
 import http from '@ohos.net.http';
 import common from '@ohos.app.ability.common';
 import AppContext from '@ohos.app.ability.common';
@@ -17,7 +17,7 @@ import { BasicDataSource } from '../util/BasicDataSource';
  * 3.发起请求
  * 4.处理结果
  */
-export class HomeViewModel extends BasicDataSource {
+export class HomeViewModel extends BasicDataSource<RecommendBean> {
   private recommendList: Array<RecommendBean> = []
 
   public initData() {
@@ -62,19 +62,19 @@ export class HomeViewModel extends BasicDataSource {
     httpRequest.request("https://test.beeselect.net/j/api/product/searchList", {
       method: http.RequestMethod.POST,
       header: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "token": UserUtil.getInstance().getUserInfo() == null ? '' : UserUtil.getInstance().getUserInfo().token,
+        "Authorization": "",
+        "platform": "2",
+        "applicationCode": "3",
+        "version": "3.2.1",
+        "fromSource": "",
+        "businessType": "1",
       },
       extraData: {
         "pageSize": 20,
         "sort": 1,
         "pageNum": 1,
-        "token": "",
-        "Authorization": "",
-        "platform": "2",
-        "applicationCode": "3",
-        "version": "3.2.1",
-        "fromSource": "3.2.1",
-        "businessType": "1",
       },
       expectDataType: http.HttpDataType.STRING, // 可选，指定返回数据的类型
       usingCache: true, // 可选，默认为true

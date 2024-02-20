@@ -25,13 +25,37 @@
     "orientation": "portrait",
     "language": "zh_CN",
     "colorMode": "light"
+   },
+   {
+    "id": "Default",
+    "deviceType": "default",
+    "width": 1080,
+    "height": 2340,
+    "shape": "rect",
+    "dpi": 480,
+    "orientation": "portrait",
+    "language": "zh_CN",
+    "colorMode": "light"
+   },
+   {
+    "id": "Tablet",
+    "deviceType": "tablet",
+    "width": 2560,
+    "height": 1600,
+    "shape": "rect",
+    "dpi": 400,
+    "orientation": "landscape",
+    "language": "zh_CN",
+    "colorMode": "light"
    }
   ],
   "runningProfileList": [
    "Phone"
   ],
   "availableProfileList": [
-   "Foldable"
+   "Foldable",
+   "Tablet",
+   "Default"
   ]
  }
 }

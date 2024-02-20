@@ -1,5 +1,11 @@
+/**
+* 当前的模块信息、编译信息配置项，包括buildOption、targets配置等。
+**/
 {
+  //API类型，FA模型或者Stage模型
   "apiType": 'stageMode',
+  //是否在服务中心露出
+  "showInServiceCenter": true,
   "buildOption": {
     "sourceOption": {
       "workers": []
