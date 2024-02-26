@@ -12,7 +12,12 @@
 4. build-profile.json5：是工程级配置信息，包括签名、产品、创建的module信息；
 5. hvigorfile.ts：是工程级编译构建任务脚本，hvigor是基于任务管理机制实现的一款全新的自动化构建工具，主要提供任务注册编排，工程模型管理、配置管理等核心能力。
 6. oh-package.json5：工程级依赖配置文件，用于记录引入包的配置信息；
-
+7. entry_module ：entry模块，编译构建产物；
+   |
+   |-build-profile.json5 //模块级别文件，声明模块对应的编译构建参数
+   |-hvigorfile.ts //模块级编译构构建脚本
+   |-oh-package.json5  //模块级依赖配置文件
+ 
 ![](screenshots/device/screenshots.gif)
 
 ### 相关概念
