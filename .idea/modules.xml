@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/entry/entry.iml" filepath="$PROJECT_DIR$/.idea/modules/entry/entry.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/harmonydemo2.iml" filepath="$PROJECT_DIR$/.idea/modules/harmonydemo2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/library/library.iml" filepath="$PROJECT_DIR$/.idea/modules/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library_share/library_share.iml" filepath="$PROJECT_DIR$/.idea/modules/library_share/library_share.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/library_static/library_static.iml" filepath="$PROJECT_DIR$/.idea/modules/library_static/library_static.iml" />
     </modules>
   </component>
 </project>

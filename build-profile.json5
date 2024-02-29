@@ -32,8 +32,20 @@
       "srcPath": "./common_lib"
     },
     {
-      "name": "library",
-      "srcPath": "./library"
+      "name": "library_share",
+      "srcPath": "./library_share",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "library_static",
+      "srcPath": "./library_static"
     }
   ]
 }

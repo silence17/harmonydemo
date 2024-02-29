@@ -49,27 +49,52 @@
       }
     }
   },
-  "ohos-module-library": {
+  "ohos-module-library_share": {
     "SELECT_TARGET": "default",
-    "MODULE_BUILD_DIR": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build",
+    "MODULE_BUILD_DIR": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build",
     "TARGETS": {
       "default": {
-        "SOURCE_ROOT": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/src/main",
+        "SOURCE_ROOT": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/src/main",
         "RESOURCES_PATH": [
-          "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/src/main/resources"
+          "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/src/main/resources"
         ],
         "BUILD_PATH": {
-          "OUTPUT_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/outputs/default",
-          "INTERMEDIA_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates",
-          "JS_ASSETS_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/loader_out/default",
-          "JS_LITE_ASSETS_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/loader_out_lite/default",
-          "RES_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/res/default",
-          "RES_PROFILE_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/res/default/resources/base/profile",
-          "ETS_SUPER_VISUAL_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/cache/default/default@CompileArkTS/esmodule",
-          "JS_SUPER_VISUAL_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/cache/default/default@CompileJS/jsbundle",
-          "WORKER_LOADER": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/loader/default/loader.json",
-          "MANIFEST_JSON": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/manifest/default",
-          "OUTPUT_METADATA_JSON": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library/build/default/intermediates/hap_metadata/default/output_metadata.json"
+          "OUTPUT_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/outputs/default",
+          "INTERMEDIA_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates",
+          "JS_ASSETS_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/loader_out/default",
+          "JS_LITE_ASSETS_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/loader_out_lite/default",
+          "RES_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/res/default",
+          "RES_PROFILE_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/res/default/resources/base/profile",
+          "ETS_SUPER_VISUAL_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/cache/default/default@CompileArkTS/esmodule",
+          "JS_SUPER_VISUAL_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/cache/default/default@CompileJS/jsbundle",
+          "WORKER_LOADER": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/loader/default/loader.json",
+          "MANIFEST_JSON": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/manifest/default",
+          "OUTPUT_METADATA_JSON": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_share/build/default/intermediates/hap_metadata/default/output_metadata.json"
+        }
+      }
+    }
+  },
+  "ohos-module-library_static": {
+    "SELECT_TARGET": "default",
+    "MODULE_BUILD_DIR": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build",
+    "TARGETS": {
+      "default": {
+        "SOURCE_ROOT": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/src/main",
+        "RESOURCES_PATH": [
+          "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/src/main/resources"
+        ],
+        "BUILD_PATH": {
+          "OUTPUT_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/outputs/default",
+          "INTERMEDIA_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates",
+          "JS_ASSETS_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/loader_out/default",
+          "JS_LITE_ASSETS_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/loader_out_lite/default",
+          "RES_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/res/default",
+          "RES_PROFILE_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/res/default/resources/base/profile",
+          "ETS_SUPER_VISUAL_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/cache/default/default@CompileArkTS/esmodule",
+          "JS_SUPER_VISUAL_PATH": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/cache/default/default@CompileJS/jsbundle",
+          "WORKER_LOADER": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/loader/default/loader.json",
+          "MANIFEST_JSON": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/manifest/default",
+          "OUTPUT_METADATA_JSON": "/Users/huchangjie/Documents/DevEcoStudioProjects/harmonydemo2/library_static/build/default/intermediates/hap_metadata/default/output_metadata.json"
         }
       }
     }
