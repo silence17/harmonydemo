@@ -4,17 +4,14 @@ import Window from '@ohos.window';
 import Want from '@ohos.app.ability.Want';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import { Log } from '@app/common_lib';
-import AbilityLifecycleCallback from '@ohos.app.ability.AbilityLifecycleCallback';
-import data from '@ohos.telephony.data';
+
 
 export default class TestAbility extends UIAbility {
   lifecycleId: number
 
   onCreate(want: Want, param: AbilityConstant.LaunchParam) {
 
-    let funAbilityWant = want;
-    hilog.debug(0x0000, 'testTag', '%{public}s', funAbilityWant.parameters?.info);
-    Log.debug('globalThis.entryAbilityStr:' + globalThis.entryAbilityStr)
+    hilog.debug(0x0000, 'testTag', '%{public}s', `TestAbility_: ${want.parameters.instanceKey}`);
 
     let abilityLifecycleCallback = {
       onAbilityCreate(ability) {
@@ -52,6 +49,10 @@ export default class TestAbility extends UIAbility {
 
     let applicationContext = this.context.getApplicationContext();
     this.lifecycleId = applicationContext.on("abilityLifecycle", abilityLifecycleCallback);
+  }
+
+  onNewWant(want: Want, launchParams: AbilityConstant.LaunchParam): void {
+    hilog.debug(0x0000, 'testTag', '%{public}s', `TestAbility_onNewWant_: ${want.parameters.instanceKey}`);
   }
 
 

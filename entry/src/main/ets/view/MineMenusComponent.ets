@@ -6,6 +6,7 @@ import { UserUtil } from '../util/UserUtil'
 import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean'
 import display from '@ohos.display'
 import { IconBean } from '../bean/IconBean'
+import { JumpAbility } from '@app/common_lib/src/main/ets/utils/JumpAbility'
 
 /**
  * 我的， 菜单组件
@@ -69,6 +70,12 @@ export struct MineMenusComponent {
           }
           .onClick((event) => {
             switch (item.id) {
+              case 1:
+                JumpAbility.jumpToTestAbility(item.id)
+                break
+              case 2:
+                JumpAbility.jumpToTestAbility(item.id)
+                break
               default:
                 ToastUtil.showToast("===== " + item.title)
                 break;

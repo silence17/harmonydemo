@@ -7,7 +7,7 @@
     //是应用的动态特性模块，在module.json5配置文件中的type标签配置为“feature”类型。一个应用程序包可以包含一个或多个Feature类型的HAP，也可以不包含；Feature类型的HAP通常用于实现应用的特性功能，可以配置成按需下载安装，也可以配置成随Entry类型的HAP一起下载安装（请参见module对象内部结构中的“deliveryWithInstall”）。
     "type": "entry",
     "description": "$string:module_desc",
-    //确定应用主入口
+    //确定应用主入口（模块入口）
     "mainElement": "EntryAbility",
     //配置，相当于Android Application
     "srcEntry": "./ets/app/MyApp.ts",
@@ -39,6 +39,7 @@
         //- 对于Feature类型的HAP，只有HarmonyOS应用可以配置具有入口能力的skills标签，HarmonyOS服务不允许配置。
         "skills": [
           {
+            //代表项目入口
             "entities": [
               "entity.system.home"
             ],
@@ -53,16 +54,18 @@
         "name": "TestAbility",
         // UIAbility组件的代码路径
         "srcEntry": "./ets/entryability/TestAbility.ets",
-        "startWindowIcon": "$media:icon",
+        "startWindowIcon": "$media:icon_1",
         "startWindowBackground": "$color:start_window_background",
-        "orientation": "portrait"
+        "orientation": "portrait",
+        "launchType": "specified"
       },
       {
         "name": "LoginAbility",
         "srcEntry": "./ets/loginability/LoginAbility.ts",
         "description": "$string:LoginAbility_desc",
         "startWindowIcon": "$media:icon",
-        "startWindowBackground": "$color:start_window_background"
+        "startWindowBackground": "$color:start_window_background",
+        "launchType": "singleton"
       }
     ],
     "extensionAbilities": [],

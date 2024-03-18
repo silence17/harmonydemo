@@ -1,6 +1,7 @@
 {
   "module": {
     "name": "library_share",
+    //HSP
     "type": "shared",
     "description": "$string:shared_desc",
     "deviceTypes": [

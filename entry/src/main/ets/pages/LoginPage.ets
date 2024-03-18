@@ -185,6 +185,10 @@ struct LoginPage {
 
 /**
  * @Extend 样式复用
+ *
+ * @Extend @Styles封装的全局样式不能够在其他文件使用。？？？
+ *
+ * inputStyle 样式名称
  */
 @Extend(Text) function inputStyle() {
   .fontColor('#333333')

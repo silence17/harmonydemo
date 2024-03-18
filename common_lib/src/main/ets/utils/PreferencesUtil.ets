@@ -4,7 +4,7 @@ import { Log } from './Log/Log';
 /**
  * @author huchangjie
  * @date 2023.11.17
- * @description 首选项 存储工具类
+ * @description 首选项 存储工具类.文件持久化
  */
 export class PreferencesUtil {
   private static readonly TAG: string = '[PreferencesUtil]';

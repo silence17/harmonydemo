@@ -3,6 +3,7 @@ import { Log } from '@app/common_lib';
 import { PreferencesUtil } from '@app/common_lib';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import preferences from '@ohos.data.preferences';
+import Want from '@ohos.app.ability.Want';
 
 
 /**
@@ -19,7 +20,7 @@ export default class MyApp extends AbilityStage {
     Log.init({
       tag: "HarmonyOSLog", //打印的标签，默认为： HarmonyOSLog
       domain: 0x0000, //输出日志所对应的业务领域,默认为0x0000
-      close: false, //是否关闭log，不打印
+      close: true, //是否关闭log，不打印
       isHilog: true, //打印类型，默认为true是hilog打印 ，false为console
       showLogLocation: true, //默认不打印，只要在error下才会打印行数
       logSize: 800 //日志每次输出大小，最大1024字节
@@ -28,9 +29,17 @@ export default class MyApp extends AbilityStage {
     PreferencesUtil.getInstance().init(this.context)
   }
 
-  onAcceptWant(want) {
+  /**
+   * 在AbilityStage 的生命周期回调中为目标UIAbility实例生成Key
+   * @param want
+   */
+  onAcceptWant(want: Want): string {
     // 仅specified模式下触发
-    return "MyAbilityStage";
+    if (want.abilityName === 'TestAbility') {
+      //根据参数中的instanceKey 参数拼接生成一个Key值并返回
+      return `TestAbility_${want.parameters.instanceKey}`
+    }
+    return ''
   }
 
   /**

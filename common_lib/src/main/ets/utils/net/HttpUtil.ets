@@ -25,7 +25,9 @@ import { ResponseResult } from './ResponseResult';
  * @param params Params for initiating an HTTP request.
  */
 export function httpRequestGet(url: string): Promise<ResponseResult> {
+  //创建一个http请求对象
   let httpRequest = http.createHttp();
+  //发送网络请求
   let responseResult = httpRequest.request(url, {
     method: http.RequestMethod.GET,
     readTimeout: GlobalConstant.HTTP_READ_TIMEOUT,
@@ -37,6 +39,7 @@ export function httpRequestGet(url: string): Promise<ResponseResult> {
   });
   let serverData: ResponseResult = new ResponseResult();
   // Processes the data and returns.
+  //处理相应结果
   return responseResult.then((value: http.HttpResponse) => {
     if (value.responseCode === GlobalConstant.HTTP_CODE_200) {
       // Obtains the returned data.

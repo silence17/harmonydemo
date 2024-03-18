@@ -41,7 +41,7 @@ struct RankPage {
   private clickBackTimeRecord: number = 0;
 
   /**
-   * @Entry装饰的组件才可以调用页面的生命周期
+   * @Entry装饰的组件才可以调用页面的生命周期。页面的生命周期
    * 页面每次显示时触发。
    */
   onPageShow() {
@@ -49,7 +49,7 @@ struct RankPage {
   }
 
   /**
-   * @Entry装饰的组件才可以调用页面的生命周期
+   * @Entry装饰的组件才可以调用页面的生命周期，页面的生命周期
    * 页面每次隐藏时触发一次
    */
   onPageHide(){
