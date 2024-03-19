@@ -5,6 +5,7 @@
     "pages/NavigationExamplePage",
     "pages/MainPage",
     "pages/LoginPage",
-    "pages/SplashPage"
+    "pages/SplashPage",
+    "pages/PromisePage"
   ]
 }

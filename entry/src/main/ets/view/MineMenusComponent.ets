@@ -7,6 +7,7 @@ import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean'
 import display from '@ohos.display'
 import { IconBean } from '../bean/IconBean'
 import { JumpAbility } from '@app/common_lib/src/main/ets/utils/JumpAbility'
+import router from '@ohos.router'
 
 /**
  * 我的， 菜单组件
@@ -75,6 +76,15 @@ export struct MineMenusComponent {
                 break
               case 2:
                 JumpAbility.jumpToTestAbility(item.id)
+                break
+              case 3:
+              //调用 router.push () 方法，跳转到 Ability 内的指定页面
+                router.pushUrl({
+                  url: 'pages/PromisePage',
+                  params: {
+                    src: 'From Rank List'
+                  }
+                }, router.RouterMode.Single)
                 break
               default:
                 ToastUtil.showToast("===== " + item.title)

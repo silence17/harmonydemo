@@ -4,6 +4,7 @@ import { PreferencesUtil } from '@app/common_lib';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import preferences from '@ohos.data.preferences';
 import Want from '@ohos.app.ability.Want';
+import { Configuration } from '@ohos.app.ability.Configuration';
 
 
 /**
@@ -31,6 +32,7 @@ export default class MyApp extends AbilityStage {
 
   /**
    * 在AbilityStage 的生命周期回调中为目标UIAbility实例生成Key
+   * onAcceptWant()事件回调：UIAbility指定实例模式（specified）启动时候触发的事件回调
    * @param want
    */
   onAcceptWant(want: Want): string {
@@ -40,6 +42,13 @@ export default class MyApp extends AbilityStage {
       return `TestAbility_${want.parameters.instanceKey}`
     }
     return ''
+  }
+
+  /**
+   * 事件回调：当系统全局配置发生变更时触发的事件，系统语言、深浅色等，配置项目前均定义在Configuration类中。
+   * @param newConfig
+   */
+  onConfigurationUpdate(newConfig: Configuration) {
   }
 
   /**

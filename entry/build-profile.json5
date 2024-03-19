@@ -9,7 +9,11 @@
   "buildOption": {
     "sourceOption": {
       "workers": []
-    }
+    },
+    //compileMode 默认可配置两种编译模式 jsbundle, esmodule
+    //jsbundle : 就是所有的文件都会打包到一个 bundle.js 文件中， 就是我们常说的 webpack , rollup 等bundle 打包工具的产物。
+    //esmodule：就是我们常说的 ES6 开始推出的 JS 模块化方案，简称 ESM。 用 import 和 export 来实现模块的导入和导出。
+    "compileMode": "esmodule"
   },
   "targets": [
     {
