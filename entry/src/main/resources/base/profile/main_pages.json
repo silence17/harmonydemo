@@ -6,6 +6,8 @@
     "pages/MainPage",
     "pages/LoginPage",
     "pages/SplashPage",
-    "pages/PromisePage"
+    "pages/PromisePage",
+    "pages/BuiPageDescr",
+    "pages/Page1"
   ]
 }

@@ -5,6 +5,7 @@ import { MinePage } from './MinePage';
 import { NavList, TabId } from '../model/NavDataModel';
 import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 import { ShopCartPage } from './ShopCartPage';
+import { Log } from '@app/common_lib/src/main/ets/utils/Log/Log';
 
 PersistentStorage.PersistProp<string>(CACHE_USER_INFO, '')
 
@@ -16,6 +17,7 @@ struct MainPage {
   @State currentIndex: number = 0
   //上一次点击退出的时间戳
   private lastPressedBack: number = 0
+  index = 0;
 
   @Builder TabBuilder(index: number) {
     Column() {

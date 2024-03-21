@@ -86,6 +86,14 @@ export struct MineMenusComponent {
                   }
                 }, router.RouterMode.Single)
                 break
+              case 4:
+                router.pushUrl({
+                  url: 'pages/BuiPageDescr',
+                  params: {
+                    src: 'From Rank List'
+                  }
+                }, router.RouterMode.Single)
+                break
               default:
                 ToastUtil.showToast("===== " + item.title)
                 break;

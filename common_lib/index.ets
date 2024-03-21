@@ -19,7 +19,11 @@ export { UserInfoBean } from './src/main/ets/bean/UserInfoBean'
 
 export { GlobalConstant } from './src/main/ets/app/GlobalConstant'
 
+export { Configs } from './src/main/ets/app/Configs'
+
 export { ResponseResult } from './src/main/ets/utils/net/ResponseResult'
+
+export { MyEventData } from './src/main/ets/utils/EventBus'
 
 export { RefreshLoadLayoutBean } from './src/main/ets/bean/RefreshLoadLayoutBean'
 
@@ -36,3 +40,7 @@ export { GridView } from '@app/refresh/src/main/ets/GridView'
 export { ListView } from '@app/refresh/src/main/ets/ListView'
 
 export { JumpAbility } from './src/main/ets/utils/JumpAbility'
+
+export { BuiPage } from './src/main/ets/components/view/BuiPage'
+
+export { BuiNavbar } from './src/main/ets/components/view/BuiNavbar'
