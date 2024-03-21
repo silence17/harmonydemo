@@ -1,6 +1,7 @@
 import BuiLoading from './components/BuiLoading';
 import { BuiNavbar } from './components/BuiNavbar';
 import BuiToast from '../utils/BuiToast';
+import ErrorLayout from './components/ErrorLayout';
 
 @Builder
 function empty() {
@@ -12,9 +13,9 @@ function empty() {
 export interface BuiPageController {}
 
 
-/**作为演示的控件编写范式
+/**
+ * 作为演示的控件编写范式
  * 自定义 页面容器 ,满足大部分 常规场景,即 顶部导航,底部操作栏,以及中间内容可滚动区域
- * 分 top middle bottom 3个区域,其中  slot为必填即内容区域
  */
 @Component
 export struct ContainerPage {
@@ -25,17 +26,13 @@ export struct ContainerPage {
    */
   controller?: BuiPageController;
   /**
-   * 是否有全局默认的padding
-   */
-  @State defaultPadding: boolean = true;
-  /**
    *  包含loading组件 默认true 只有在首页这种已经是页面容器切包含loading组件的情况下禁用
    */
   @State include_loading?: boolean = false;
   /**
-   * 包含toast组件 默认true 只有在首页这种已经是页面容器切包含toast组件的情况下禁用
+   *  包含loading组件 默认true 只有在首页这种已经是页面容器切包含loading组件的情况下禁用
    */
-  @State include_toast: boolean = false;
+  @State include_error?: boolean = false;
   /**
    * title
    */
@@ -43,32 +40,35 @@ export struct ContainerPage {
   /**
    * 注意::: 传slot是函数定义
    *  当有且只有一个BuilderParam 的时候,组件支持代码块方式的内嵌子组件
-
    * ContainerPage({
-   *    defaultPadding:false,
-   *    slot: this.CustomBuilder , //这个是 @builder 注解的方法,由调用方书写, 内容为 内部排版,即 slot内容
+   *    contentLayout: this.CustomBuilder , //这个是 @builder 注解的方法,由调用方书写, 内容为 内部排版,即 slot内容
    * })
    *
    */
-  @BuilderParam slot: () => void = empty;
+  @BuilderParam contentLayout: () => void = empty;
   /**
    * 右侧菜单描述
    */
-  @BuilderParam slot_right: () => void = empty
+  @BuilderParam titleRightLayout: () => void = empty
 
   build() {
     Column() {
-      //顶部slot
+      //title
       BuiNavbar({
         titleStr: this.titleStr,
         tapLeftBack: true,
-        slot_right: this.slot_right
+        slot_right: this.titleRightLayout
       }).width('100%')
 
-      //内容区域
-      Column() {
-        this.slot();
-      }.alignItems(HorizontalAlign.Start)
+      Stack() {
+        //内容区域
+        this.contentLayout();
+        //异常页面
+        if (this.include_error) {
+          ErrorLayout();
+        }
+      }
+      .alignContent(Alignment.TopStart)
       .constraintSize({
         minWidth: '100%',
         minHeight: '100%',
@@ -76,12 +76,9 @@ export struct ContainerPage {
       })
 
       if (this.include_loading) {
-        BuiLoading();
+        BuiLoading()
       }
-      if (this.include_toast) {
-        BuiToast()
-      }
-    }
+    }.backgroundColor('#F7F7F7')
     .layoutWeight(1)
   }
 

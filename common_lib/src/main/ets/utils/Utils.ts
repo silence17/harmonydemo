@@ -55,6 +55,27 @@ export class Utils {
     EventBus.emit(p);
   }
 
+
+  /**
+   * 展示错误页面
+   * @param p  异常页面Bean
+   */
+  static showError(p?: { [key: string]: any }) {
+    let r = router.getState();
+    if (!p) p = {} as MyEventData;
+    p["pathName"] = r.path + r.name;
+    p["eventName"] = 'showError';
+    EventBus.emit(p);
+  }
+
+  static hideError(p?: { [key: string]: any }) {
+    let r = router.getState();
+    if (!p) p = {} as MyEventData;
+    p["pathName"] = r.path + r.name;
+    p["eventName"] = 'hideError';
+    EventBus.emit(p);
+  }
+
   static toast(p?: { [key: string]: any }) {
     let r = router.getState();
     if (!p) p = {} as MyEventData;

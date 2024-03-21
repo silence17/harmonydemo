@@ -1,12 +1,12 @@
 {
-  "totalTime": 2517700834,
+  "totalTime": 2569432750,
   "moduleNum": 1,
   "taskTime": {
-    "compileArkTS": 2103981417,
-    "compileJS": 6676375,
+    "compileArkTS": 2102910833,
+    "compileJS": 10052333,
     "compileResource": 0,
-    "packageHap": 205399125,
-    "signHap": 343084
+    "packageHap": 222450375,
+    "signHap": 350125
   },
   "isIncremental": true,
   "hasIncremental": true,
