@@ -94,6 +94,14 @@ export struct MineMenusComponent {
                   }
                 }, router.RouterMode.Single)
                 break
+              case 5:
+                router.pushUrl({
+                  url: 'example/ExamplePage',
+                  params: {
+                    src: 'From Rank List'
+                  }
+                }, router.RouterMode.Single)
+                break
               default:
                 ToastUtil.showToast("===== " + item.title)
                 break;

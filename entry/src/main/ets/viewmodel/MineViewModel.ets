@@ -64,6 +64,13 @@ export class MineViewModel {
         icon: $r('app.media.icon_call_server'),
         title: '核销码',
         rightIcon: $r('app.media.icon_right_arrow')
+      },
+      {
+        id: 5,
+        type: 2,
+        icon: $r('app.media.icon_call_server'),
+        title: 'Container Page',
+        rightIcon: $r('app.media.icon_right_arrow')
       }
     ]
   }

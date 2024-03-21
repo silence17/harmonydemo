@@ -1,5 +1,5 @@
 import BuiToast from '../../utils/BuiToast';
-import BuiLoading from './BuiLoading';
+import BuiLoading from '../../common/components/BuiLoading';
 
 @Builder
 function empty() {

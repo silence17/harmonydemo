@@ -143,7 +143,6 @@ export default struct BuiText {
     )
     .textAlign(TextAlign.Start)
     .maxLines(this.ellipsis != Number.MAX_VALUE ? this.ellipsis : 30000);
-
   }
 
   textStyle(): TextStruct {

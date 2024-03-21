@@ -43,4 +43,8 @@ export { JumpAbility } from './src/main/ets/utils/JumpAbility'
 
 export { BuiPage } from './src/main/ets/components/view/BuiPage'
 
-export { BuiNavbar } from './src/main/ets/components/view/BuiNavbar'
+export { BuiNavbar } from './src/main/ets/common/components/BuiNavbar'
+
+export { ContainerPage } from './src/main/ets/common/ContainerPage'
+
+export { Utils } from './src/main/ets/utils/Utils'

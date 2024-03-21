@@ -1,5 +1,5 @@
 import display from '@ohos.display';
-import Configs from '../../app/Configs';
+import Configs from '../app/Configs';
 
 let __init:boolean = false;
 let height = 0;

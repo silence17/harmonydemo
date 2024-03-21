@@ -1,6 +1,4 @@
-import { BuiPage, BuiNavbar } from '@app/common_lib'
-import BuiLoading from '@app/common_lib/src/main/ets/components/view/BuiLoading'
-import Utils from '../util/Utils'
+import { BuiPage, BuiNavbar, Utils } from '@app/common_lib'
 
 @Entry
 @Component

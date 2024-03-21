@@ -8,6 +8,7 @@
     "pages/SplashPage",
     "pages/PromisePage",
     "pages/BuiPageDescr",
-    "pages/Page1"
+    "pages/Page1",
+    "example/ExamplePage"
   ]
 }
