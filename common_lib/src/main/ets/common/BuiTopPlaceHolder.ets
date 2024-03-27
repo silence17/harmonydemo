@@ -1,5 +1,5 @@
 import display from '@ohos.display';
-import Configs from '../app/Configs';
+import {GlobalConstant} from '../app/GlobalConstant';
 
 let __init:boolean = false;
 let height = 0;
@@ -14,7 +14,7 @@ export default struct BuiTopPlaceHolder {
 
 
   build(){
-    if(Configs.fullScreen){
+    if(GlobalConstant.fullScreen){
       Column().height(this.h+"px")
     }
   }
