@@ -15,11 +15,11 @@ export { ToastUtil } from './src/main/ets/utils/ToastUtil'
 
 export { StringUtil } from './src/main/ets/utils/StringUtil'
 
+export { UserUtil } from './src/main/ets/utils/UserUtil'
+
 export { UserInfoBean } from './src/main/ets/bean/UserInfoBean'
 
 export { GlobalConstant } from './src/main/ets/app/GlobalConstant'
-
-export { Configs } from './src/main/ets/app/Configs'
 
 export { ResponseResult } from './src/main/ets/utils/net/ResponseResult'
 
@@ -48,3 +48,5 @@ export { BuiNavbar } from './src/main/ets/common/components/BuiNavbar'
 export { ContainerPage } from './src/main/ets/common/ContainerPage'
 
 export { Utils } from './src/main/ets/utils/Utils'
+
+export { HttpClient, RequestParam, ResponseData } from './src/main/ets/utils/axios/HttpClient'

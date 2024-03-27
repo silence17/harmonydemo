@@ -1,8 +1,16 @@
-import { Log, PreferencesUtil, ResponseResult, ToastUtil, UserInfoBean } from '@app/common_lib';
+import {
+  HttpClient,
+  Log,
+  PreferencesUtil,
+  RequestParam,
+  ResponseResult,
+  ToastUtil,
+  UserInfoBean,
+  UserUtil
+} from '@app/common_lib';
 import http from '@ohos.net.http';
 import common from '@ohos.app.ability.common';
 import AppContext from '@ohos.app.ability.common';
-import { UserUtil } from '../util/UserUtil';
 
 
 /**
@@ -13,6 +21,34 @@ import { UserUtil } from '../util/UserUtil';
  */
 export class LoginViewModel {
   public initData() {
+  }
+
+  login2(phone: string, pwd: string) {
+    var map = new Map<string, any>();
+    map["cellphone"] = phone;
+    map["password"] = pwd;
+    map["type"] = 1;
+
+    let request: RequestParam<UserInfoBean> = {
+      url: "/j/api/member/login",
+      params: map,
+      success: (response => {
+        ToastUtil.showToast("请求成功")
+      }),
+      fail: (err => {
+        ToastUtil.showToast("请求失败")
+      })
+    }
+
+    new HttpClient<UserInfoBean>().post(request)
+
+    // RequestTask
+    //   .post<string, null>('/j/api/product/searchList', params)
+    //   .then((response: AxiosResponse<string>) => {
+    //     console.log("=====" + JSON.stringify(response));
+    //   }).catch((error) => {
+    //   console.info(JSON.stringify(error));
+    // })
   }
 
 

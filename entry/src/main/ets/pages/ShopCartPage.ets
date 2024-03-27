@@ -1,8 +1,8 @@
-import { UserUtil } from '../util/UserUtil'
 import { ShopCartViewModel } from '../viewmodel/ShopCartViewModel'
 import { ShopBean } from '../bean/ShopCartBean'
 import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil'
 import { Navbar } from '../widget/Navbar'
+import { UserUtil } from '@app/common_lib'
 
 @Preview
 @Component

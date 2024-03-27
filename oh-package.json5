@@ -9,7 +9,6 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    //三方网络库
     "@ohos/axios": "^2.1.1"
   }
 }

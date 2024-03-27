@@ -1,7 +1,6 @@
 import { Log } from '@app/common_lib/src/main/ets/utils/Log/Log'
 import media from '@ohos.multimedia.media'
 import common from '@ohos.app.ability.common';
-import { UserUtil } from '../util/UserUtil';
 import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean';
 import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
 

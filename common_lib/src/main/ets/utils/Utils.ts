@@ -1,43 +1,14 @@
 import EventBus, { MyEventData } from './EventBus';
 import display from '@ohos.display';
 import router from '@ohos.router';
+import bundleManager from '@ohos.bundle.bundleManager';
+import { Log } from './Log/Log';
 
-
-export interface IConfig {
-  //当前发布环境
-  env: string;
-}
-
-let AppConfig: IConfig;
 
 export class Utils {
-  initConfig(jsonStr: string) {
-    AppConfig = JSON.parse(jsonStr) as IConfig;
-    console.log("AppConfig", AppConfig)
-  }
-
-  /**
-   * 是否是生产环境
-   * @returns
-   */
-  isProd() {
-    return AppConfig.env == 'production';
-  }
-
-
   getUserInfoForRequestHeader() {
     return {}
   }
-
-  getWindowSize() {
-    let dis = display.getDefaultDisplaySync();
-    return {
-      width: dis.width,
-      height: dis.height
-    }
-
-  }
-
 
   static showLoading(p?: { [key: string]: any }) {
     let r = router.getState();
@@ -54,7 +25,6 @@ export class Utils {
     p["eventName"] = 'hideLoading';
     EventBus.emit(p);
   }
-
 
   /**
    * 展示错误页面

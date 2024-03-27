@@ -29,7 +29,7 @@ import { FailLayoutBean } from '@app/common_lib/src/main/ets/bean/FailLayoutBean
 import { IconBean } from '../bean/IconBean';
 import { StringUtil } from '@app/common_lib/src/main/ets/utils/StringUtil';
 import { CountEditText } from '@app/common_lib/src/main/ets/components/view/CountEditText';
-import { UserUtil } from '../util/UserUtil';
+import { UserUtil } from '@app/common_lib';
 
 /**
  * home

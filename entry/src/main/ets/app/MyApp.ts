@@ -1,10 +1,12 @@
 import AbilityStage from '@ohos.app.ability.AbilityStage';
-import { Log } from '@app/common_lib';
-import { PreferencesUtil } from '@app/common_lib';
+import { Log, PreferencesUtil } from '@app/common_lib';
 import AbilityConstant from '@ohos.app.ability.AbilityConstant';
 import preferences from '@ohos.data.preferences';
 import Want from '@ohos.app.ability.Want';
 import { Configuration } from '@ohos.app.ability.Configuration';
+import bundleManager from '@ohos.bundle.bundleManager';
+import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil';
+import { GlobalConstant } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 
 
 /**
@@ -18,10 +20,12 @@ export default class MyApp extends AbilityStage {
    * 应用的HAP在首次加载的时，为该Module初始化操作
    */
   onCreate() {
+    //初始化应用信息
+    new GlobalConstant()
     Log.init({
       tag: "HarmonyOSLog", //打印的标签，默认为： HarmonyOSLog
       domain: 0x0000, //输出日志所对应的业务领域,默认为0x0000
-      close: true, //是否关闭log，不打印
+      close: false, //是否关闭log，不打印
       isHilog: true, //打印类型，默认为true是hilog打印 ，false为console
       showLogLocation: true, //默认不打印，只要在error下才会打印行数
       logSize: 800 //日志每次输出大小，最大1024字节

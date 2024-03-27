@@ -1,4 +1,5 @@
-import { StringUtil, UserInfoBean } from '@app/common_lib';
+import { UserInfoBean } from '../bean/UserInfoBean';
+import { StringUtil } from './StringUtil';
 
 export class UserUtil {
   private static instance: UserUtil

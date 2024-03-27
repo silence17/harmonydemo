@@ -1,7 +1,6 @@
 import http from '@ohos.net.http';
-import { Log, PreferencesUtil, ResponseResult, ToastUtil, UserInfoBean } from '@app/common_lib';
+import { Log, PreferencesUtil, ResponseResult, ToastUtil, UserInfoBean, UserUtil } from '@app/common_lib';
 import { ShopCartList } from '../bean/ShopCartBean';
-import { UserUtil } from '../util/UserUtil';
 
 /**
  * 购物车

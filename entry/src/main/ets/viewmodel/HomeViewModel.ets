@@ -1,8 +1,17 @@
-import { Log, PreferencesUtil, ResponseResult, StringUtil, ToastUtil, UserInfoBean } from '@app/common_lib';
+import {
+  Log,
+  PreferencesUtil,
+  ResponseResult,
+  StringUtil,
+  ToastUtil,
+  UserInfoBean,
+  UserUtil,
+  HttpClient,
+  RequestParam
+} from '@app/common_lib';
 import http from '@ohos.net.http';
 import common from '@ohos.app.ability.common';
 import AppContext from '@ohos.app.ability.common';
-import { UserUtil } from '../util/UserUtil';
 import promptAction from '@ohos.promptAction';
 import List from '@ohos.util.List';
 import ArrayList from '@ohos.util.ArrayList';
@@ -52,6 +61,26 @@ export class HomeViewModel extends BasicDataSource<RecommendBean> {
     return icons
   }
 
+  getRecommendProducts2() {
+
+    var map = new Map<string, any>();
+    map["pageSize"] = 5;
+    map["sort"] = 1;
+    map["pageNum"] = 1;
+
+    let request: RequestParam<string> = {
+      url: "/j/api/product/searchList",
+      params: map,
+      success: (response => {
+        ToastUtil.showToast("请求成功")
+      }),
+      fail: (err => {
+        ToastUtil.showToast("请求失败")
+      })
+    }
+
+    new HttpClient<String>().post(request)
+  }
 
   getRecommendProducts(callback: Function) {
     let httpRequest = http.createHttp();

@@ -2,12 +2,12 @@ import { ToastUtil } from '@app/common_lib/src/main/ets/utils/ToastUtil'
 import { ItemBean } from '../bean/ItemBean'
 import { MineViewModel } from '../viewmodel/MineViewModel'
 import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant'
-import { UserUtil } from '../util/UserUtil'
 import { UserInfoBean } from '@app/common_lib/src/main/ets/bean/UserInfoBean'
 import display from '@ohos.display'
 import { IconBean } from '../bean/IconBean'
 import { JumpAbility } from '@app/common_lib/src/main/ets/utils/JumpAbility'
 import router from '@ohos.router'
+import { UserUtil } from '@app/common_lib'
 
 /**
  * 我的， 菜单组件
