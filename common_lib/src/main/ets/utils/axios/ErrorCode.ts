@@ -16,6 +16,9 @@ export default {
   STATUS_SERVICE_UNAVAILABLE: 503,
   STATUS_GATEWAY_TIMEOUT: 504,
 
+  //网络请求被取消
+  STATUS_ERR_CANCELED: 'ERR_CANCELED',
+
 
   //======================= 业务代码 ========================
 

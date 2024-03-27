@@ -1,14 +1,11 @@
-import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-} from "@ohos/axios"
+import axios, { AxiosRequestConfig, AxiosResponse, } from "@ohos/axios"
 import GlobalConstant from '../../app/GlobalConstant'
 import Log from '../Log';
 import { UserUtil } from '../UserUtil'
 import HttpStore from './HttpStore';
 
 
-//无需取消的重复接口
+//无需取消的白名单
 const noCancelList = [];
 
 
@@ -28,32 +25,36 @@ const service = axios.create({
 
 //axios请求Map添加值
 const addPendingRequest = (config) => {
-  const httpMap = HttpStore.getInstance().httpsMap;
+  const pendingRequest = HttpStore.getInstance().httpsMap;
   if (noCancelList.indexOf(config.url.split('?')[0]) >= 0) {
     return;
   }
 
+  //生成key的策略
   const requestKey = config.url;
-  config.cancelToken = new axios.CancelToken(cancel => {
-    if (!httpMap.has(requestKey)) {
-      //  pendingRequest.set(requestKey, cancel);
-      httpMap[requestKey] = cancel;
+  config.cancelToken = config.cancelToken || new axios.CancelToken(cancel => {
+    if (!pendingRequest.has(requestKey)) {
+      pendingRequest.set(requestKey, cancel);
+
+      console.debug("request queue：" + pendingRequest.size)
+      for (let key in pendingRequest.keys()) {
+        console.debug("request key：" + pendingRequest.get(key))
+      }
     }
   });
 };
 
 //axios请求Map删除值
 const removePendingRequest = (config: AxiosRequestConfig) => {
-  const httpMap = HttpStore.getInstance().httpsMap;
-  if (noCancelList.indexOf(config.url) >= 0) {
+  const pendingRequest = HttpStore.getInstance().httpsMap;
+  const requestKey = config.url;
+  if (noCancelList.indexOf(requestKey) >= 0) {
     return;
   }
-  // const requestKey = generateReqKey(config);
-  const requestKey = config.url;
-  if (httpMap.has(requestKey)) {
-    const cancelToken = httpMap.get(requestKey);
-    cancelToken('请求被取消');
-    httpMap.delete(requestKey);
+  if (pendingRequest.has(requestKey)) {
+    const cancelToken = pendingRequest.get(requestKey);
+    cancelToken(requestKey);
+    pendingRequest.delete(requestKey);
   }
 };
 
@@ -76,7 +77,7 @@ service.interceptors.request.use((config) => {
   config.headers['businessType'] = '1';
 
   //打印日志
-  console.info('start====================================')
+  console.info('start================================')
   console.info("request headers=>", config.headers)
   let urlLog = config.method + '= ' + config.baseURL + config.url
   console.info("request url=> ", urlLog.toString())
@@ -88,7 +89,7 @@ service.interceptors.request.use((config) => {
     case 'get':
       break
   }
-  console.info('end====================================')
+  console.info('end==================================')
 
   return config;
 }, error => {
@@ -102,20 +103,21 @@ service.interceptors.request.use((config) => {
 service.interceptors.response.use((response: AxiosResponse) => {
   const data = response.data
 
-  console.info('start====================================')
-  console.info("response", JSON.stringify(data))
-  console.info('end====================================')
+  console.debug('start==================================')
+  console.debug("response => ", JSON.stringify(data))
+  console.debug('end====================================')
   return data
 }, error => {
   console.error("网络请求失败")
   return {
-    resultCode: error.response?.status || "5000",
-    message: "网络请求错误",
+    // 调用cancelToken(requestKey);
+    // error.code ERR_CANCELED
+    status: error?.response?.status || error?.code || "5000",
+    statusText: error?.name || "网络请求错误",
     errorMessage: error.message,
     stack: error.stack
   }
-}
-)
+})
 
 
 /**

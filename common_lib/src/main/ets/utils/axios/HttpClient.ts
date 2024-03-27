@@ -19,7 +19,8 @@ export interface RequestParam<T> {
 
 ///标准返回报文格式
 export class ResponseData<T> {
-  status?: number
+  //200,404,ERR_CANCELED(请求被取消)
+  status?: number | string
   msg?: string
   data?: T
 }
@@ -61,8 +62,8 @@ export class HttpClient<T> {
     // Log.error("params", JSON.stringify(param.params))
     // Log.error("response", JSON.stringify(respData))
 
-    let errorCode = respData.status
-    if (respData.status === ErrorCode.STATUS_200) {
+    let errorCode: string | number = respData.status
+    if (errorCode === ErrorCode.STATUS_200) {
       errorCode = respData.data.status
     }
 
@@ -81,16 +82,19 @@ export class HttpClient<T> {
       //todo 前往登录
         param.fail(respData.data)
         break
+      case ErrorCode.STATUS_ERR_CANCELED:
+      //网络请求被取消了，不上报
+        console.warn('网络请求被取消了' + respData.statusText)
+        return;
       default:
       //{"resultCode":500,"message":"网络请求错误","errorMessage":"Request failed with status code 500","stack":"}
         let result = Object.assign({
-          resultCode: 5000,
-          message: "服务器开小差了",
-          errorMessage: ''
+          status: 5000,
+          errorMessage: "服务器开小差了",
         }, respData);
         let response = new ResponseData<T>()
-        response.msg = result['message']
-        response.status = result['resultCode']
+        response.status = result['status']
+        response.msg = result['errorMessage']
 
         param.fail(response)
     }
