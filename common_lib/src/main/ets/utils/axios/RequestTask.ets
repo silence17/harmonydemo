@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, } from "@ohos/axios"
-import GlobalConstant from '../../app/GlobalConstant'
-import Log from '../Log';
+import { GlobalConstant } from '../../app/GlobalConstant';
 import { UserUtil } from '../UserUtil'
 import HttpStore from './HttpStore';
 
@@ -10,9 +9,9 @@ const noCancelList = [];
 
 
 // @link https://ohpm.openharmony.cn/#/cn/detail/@ohos%2Faxios
-const service = axios.create({
+export const service = axios.create({
   // API from the environment variable
-  baseURL: GlobalConstant.getBaseUrl(),
+  baseURL: GlobalConstant.base_url_product,
   timeout: GlobalConstant.HTTP_READ_TIMEOUT,
   method: "POST",
   headers: {
@@ -126,7 +125,7 @@ service.interceptors.response.use((response: AxiosResponse) => {
  *
  * 范型D == null 时为任意类型
  */
-export class RequestTask {
+export default class RequestTask {
   static post<T = any, D = any>(url, data, config?: AxiosRequestConfig<D>) {
     if (data === undefined) {
       data = {}

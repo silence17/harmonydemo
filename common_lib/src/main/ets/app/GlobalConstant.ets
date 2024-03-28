@@ -4,14 +4,14 @@ import Log from '../utils/Log'
 export const CACHE_USER_INFO: string = 'cache_user_info_json'
 
 export class GlobalConstant {
-  //BundleInfo
-  private appInfo: any
+  //BundleInfo 应用信息
+  static appInfo: bundleManager.BundleInfo
 
   //The delay time.
   static readonly DELAY_TIME: number = 1000;
 
   // 网络请求超时.
-  readonly HTTP_READ_TIMEOUT: number = 10000;
+  static readonly HTTP_READ_TIMEOUT: number = 10000;
 
   //Http request success status code.
   static readonly HTTP_CODE_200: number = 200;
@@ -40,43 +40,39 @@ export class GlobalConstant {
   /**
    * app全局是否隐藏顶部系统栏
    */
-  public static  readonly hideSystemBar: boolean = false;
+  public static readonly hideSystemBar: boolean = false;
 
+  public static getBaseUrl() {
+    let baseURL = ''
+    let devModel = this.appInfo.appInfo.appProvisionType
 
-  constructor() {
-    //获取系统基本信息,注意 bundleFlags 不同,获取的信息不同,不要随意改变这里的flag
-    let bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
-    bundleManager.getBundleInfoForSelf(bundleFlags).then((bundleInfo) => {
-      this.appInfo = bundleInfo
-
-      Log.info('versionName:' + bundleInfo.versionName + ', versionCode:' + bundleInfo.versionCode + ',packageName:' + bundleInfo.name)
-      const appInfo = bundleInfo.appInfo
-      Log.info('packageName:' + appInfo.name + ', label:' + appInfo.label + ', description:' + appInfo.description + ', icon:' + appInfo.icon + ', process:' + appInfo.process + ', codePath:' + appInfo.codePath)
-    })
-  }
-
-  public getBaseUrl() {
-    // let baseURL = '';
-    // if (this.appInfo.appProvisionType != undefined && this.appInfo.appProvisionType == 'debug') {
-    //   baseURL = GlobalConstant.base_url_test
-    // } else {
-    //   baseURL = GlobalConstant.base_url_product
-    // }
-    // return baseURL;
-    return GlobalConstant.base_url_test
+    if (devModel == undefined) {
+      baseURL = GlobalConstant.base_url_product
+    } else {
+      switch (devModel) {
+        case 'release':
+          baseURL = GlobalConstant.base_url_product
+          break
+        case 'debug':
+          baseURL = GlobalConstant.base_url_test
+          break
+      }
+    }
+    return baseURL;
+    // return GlobalConstant.base_url_test
   }
 
   /**
    * 获取版本号
    * @returns 3.2.1
    */
-  public getVersionCode(): string {
+  public static getVersionCode(): string {
     return this.appInfo.versionName;
   }
 }
 
 ///export default 关键字来默认导出一个变量、函数或类。每个文件只能有一个默认导出。
-export default new GlobalConstant();
+// export default new GlobalConstant();
 
 
 export enum PageState {

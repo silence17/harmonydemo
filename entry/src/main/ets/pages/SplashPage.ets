@@ -1,6 +1,9 @@
 import { Log } from '@app/common_lib';
 import router from '@ohos.router';
 import window from '@ohos.window';
+import bundleManager from '@ohos.bundle.bundleManager';
+import { GlobalConstant } from '@app/common_lib/src/main/ets/app/GlobalConstant';
+import { service } from '@app/common_lib/src/main/ets/utils/axios/RequestTask';
 
 /**
  * 闪屏页
@@ -19,16 +22,34 @@ struct SplashPage {
       // 设置导航栏、状态栏不显示，从而达到沉浸式效果
       window.setWindowSystemBarEnable([])
     })
-    setTimeout(() => {
-      //调用 router.replaceUrl() 方法，跳转到 Ability 内的指定页面
-      //目标页面会替换当前页，并销毁当前页
-      router.replaceUrl({
-        url: 'pages/MainPage',
-        params: {
-          src: 'SplashPage'
-        }
-      }, router.RouterMode.Single)
-    }, 2000)
+
+    new Promise<string>(function (resolve, reject) {
+      //获取系统基本信息,注意 bundleFlags 不同,获取的信息不同,不要随意改变这里的flag
+      let bundleFlags = bundleManager.BundleFlag.GET_BUNDLE_INFO_WITH_APPLICATION;
+      bundleManager.getBundleInfoForSelf(bundleFlags).then((bundleInfo) => {
+        GlobalConstant.appInfo = bundleInfo
+
+        Log.info('versionName:' + bundleInfo.versionName + ', versionCode:' + bundleInfo.versionCode + ',packageName:' + bundleInfo.name)
+        const appInfo = bundleInfo.appInfo
+        Log.info('packageName:' + appInfo.name + ', label:' + appInfo.label + ', description:' + appInfo.description + ', icon:' + appInfo.icon + ', process:' + appInfo.process + ', codePath:' + appInfo.codePath)
+
+        resolve(GlobalConstant.getBaseUrl())
+      })
+    }).then(result => {
+      service.defaults.baseURL = result
+
+
+      setTimeout(() => {
+        //调用 router.replaceUrl() 方法，跳转到 Ability 内的指定页面
+        //目标页面会替换当前页，并销毁当前页
+        router.replaceUrl({
+          url: 'pages/MainPage',
+          params: {
+            src: 'SplashPage'
+          }
+        }, router.RouterMode.Single)
+      }, 500)
+    })
   }
 
   onPageHide() {

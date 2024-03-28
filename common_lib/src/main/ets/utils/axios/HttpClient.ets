@@ -1,9 +1,9 @@
 import { AxiosResponse } from '@ohos/axios';
-import { RequestTask } from './RequestTask';
 import { StringUtil } from '../StringUtil';
 import { Utils } from '../Utils';
 import { Log } from '../Log/Log';
 import ErrorCode from './ErrorCode';
+import RequestTask from './RequestTask';
 
 /// 请求入参
 export interface RequestParam<T> {
@@ -27,13 +27,12 @@ export class ResponseData<T> {
 
 
 export class HttpClient<T> {
+
   /**
    * @param {Object} param 接口调用方传递的参数
-   *
-   args 定义
    */
-  _processParam(args: RequestParam<T>, method = "get") {
-    if (!args.url) throw new Error("API 请求最起码要一个url参数");
+  private _processParam(args: RequestParam<T>, method = "get") {
+    if (!args.url) throw new Error("API 请求缺少url参数");
 
     switch (method) {
       case "get":
@@ -57,7 +56,7 @@ export class HttpClient<T> {
    * @param {Object} respData
    * @returns {code:"",message:""}
    */
-  _processServiceCommon(param: RequestParam<T>, respData: AxiosResponse<ResponseData<T>>) {
+  private _processServiceCommon(param: RequestParam<T>, respData: AxiosResponse<ResponseData<T>>) {
     // Log.error("url", param.url)
     // Log.error("params", JSON.stringify(param.params))
     // Log.error("response", JSON.stringify(respData))
@@ -119,7 +118,11 @@ export class HttpClient<T> {
     return ps;
   }
 
-  _doPost(param: RequestParam<T>) {
+  /**
+   * 实际post集合
+   * @param param 请求参数集合
+   */
+  private _doPost(param: RequestParam<T>) {
     if (param.showLoading) {
       Utils.showLoading()
     }
@@ -141,7 +144,11 @@ export class HttpClient<T> {
     });
   }
 
-  _doGet(param: RequestParam<T>) {
+  /**
+   * 实际发送get请求
+   * @param param 请求参数集合
+   */
+  private _doGet(param: RequestParam<T>) {
     if (param.showLoading) {
       Utils.showLoading()
     }

@@ -20,8 +20,6 @@ export default class MyApp extends AbilityStage {
    * 应用的HAP在首次加载的时，为该Module初始化操作
    */
   onCreate() {
-    //初始化应用信息
-    new GlobalConstant()
     Log.init({
       tag: "HarmonyOSLog", //打印的标签，默认为： HarmonyOSLog
       domain: 0x0000, //输出日志所对应的业务领域,默认为0x0000

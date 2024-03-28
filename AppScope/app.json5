@@ -7,8 +7,9 @@
     //推荐采用反域名形式命名（如com.example.demo，建议第一级为域名后缀com，第二级为厂商/个人名，第三级为应用名，也可以多级）
     "bundleName": "com.example.rankdemo",
     "vendor": "example",
-    "versionCode": 1000000,
+    "versionCode": 1000,
     "versionName": "1.0.0",
+    "debug": true,
     //标识应用的图标，标签值为图标资源文件的索引。
     "icon": "$media:app_icon",
     //标识应用的名称（设置-应用列表），标签值为字符串资源的索引。
