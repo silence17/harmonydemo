@@ -17,10 +17,7 @@ export struct BuiNavbar {
   @BuilderParam slot_title: () => void = empty
   @BuilderParam slot_right: () => void = empty
 
-  /**
-   * 左边点击默认后退事件, false则需要自定义left
-   */
-  @State tapLeftBack: boolean = true
+
   /**
    * 如果不传自定义left ,默认展示后退按钮
    */
@@ -56,14 +53,10 @@ export struct BuiNavbar {
               this.myLeft()
             }
           }.onClick(() => {
-            if (this.tapLeftBack) {
-              if (this.onBeforeLeft) {
-                if (this.onBeforeLeft() === false) {
-                  return;
-                }
-              }
-              router.back();
+            if (this.onBeforeLeft() === false) {
+              return;
             }
+            router.back();
           }).justifyContent(FlexAlign.Center).constraintSize({ maxWidth: 100, minHeight: 56 })
           .alignItems(HorizontalAlign.Start)
 

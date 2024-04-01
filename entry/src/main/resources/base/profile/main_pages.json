@@ -9,6 +9,7 @@
     "pages/PromisePage",
     "pages/BuiPageDescr",
     "pages/Page1",
-    "example/ExamplePage"
+    "example/ExamplePage",
+    "pages/WebViewPage"
   ]
 }

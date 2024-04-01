@@ -102,6 +102,15 @@ export struct MineMenusComponent {
                   }
                 }, router.RouterMode.Single)
                 break
+              case 6:
+                router.pushUrl({
+                  url: 'pages/WebViewPage',
+                  params: {
+                    title: 'WebView',
+                    link: 'https://www.baidu.com/'
+                  }
+                }, router.RouterMode.Standard)
+                break
               default:
                 ToastUtil.showToast("===== " + item.title)
                 break;

@@ -71,6 +71,13 @@ export class MineViewModel {
         icon: $r('app.media.icon_call_server'),
         title: 'Container Page',
         rightIcon: $r('app.media.icon_right_arrow')
+      },
+      {
+        id: 6,
+        type: 2,
+        icon: $r('app.media.icon_call_server'),
+        title: 'webview',
+        rightIcon: $r('app.media.icon_right_arrow')
       }
     ]
   }

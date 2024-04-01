@@ -56,7 +56,6 @@ export struct ContainerPage {
       //title
       BuiNavbar({
         titleStr: this.titleStr,
-        tapLeftBack: true,
         slot_right: this.titleRightLayout
       }).width('100%')
 
