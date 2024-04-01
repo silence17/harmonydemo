@@ -11,6 +11,7 @@
     "mainElement": "EntryAbility",
     //配置，相当于Android Application
     "srcEntry": "./ets/app/MyApp.ts",
+    //tablet:平板；tv:智慧屏； wearable：只能手表；car：车机； phone：手机
     "deviceTypes": [
       "phone"
     ],

@@ -1,3 +1,6 @@
+/**
+ * 签名文件、sdk版本、 module声明
+ */
 {
   "app": {
     "signingConfigs": [
