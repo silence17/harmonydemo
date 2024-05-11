@@ -91,6 +91,14 @@
     {
       "name": "text_select",
       "value": "#007dff"
+    },
+    {
+      "name": "tab_bar_select_color",
+      "value": "#73CD57"
+    },
+    {
+      "name": "tab_bar_normal_color",
+      "value": "#999999"
     }
   ]
 }

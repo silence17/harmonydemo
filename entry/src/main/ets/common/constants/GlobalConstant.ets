@@ -1,14 +1,16 @@
 import bundleManager from '@ohos.bundle.bundleManager'
-import Log from '../utils/Log'
 
 export const CACHE_USER_INFO: string = 'cache_user_info_json'
+
+// 客服电话
+export const SERVICE_PHONE = "010-65915326"
 
 export class GlobalConstant {
   //BundleInfo 应用信息
   static appInfo: bundleManager.BundleInfo
 
   //The delay time.
-  static DELAY_TIME: number = 1000;
+  static readonly DELAY_TIME: number = 1000;
 
   // 网络请求超时.
   static readonly HTTP_READ_TIMEOUT: number = 10000;
@@ -33,14 +35,14 @@ export class GlobalConstant {
   //生产
   static readonly base_url_product = "https://www.beeselect.net"
 
-  /**
-   * app全局是否全屏  即 是否 畅享全屏模式, 目前 没有多试 , 仅知道 启动时可以设置, 页面是否可以独立设置,暂未深入
-   */
-  public static fullScreen: boolean = false;
-  /**
-   * app全局是否隐藏顶部系统栏
-   */
-  public static readonly hideSystemBar: boolean = false;
+  //app全局是否全屏  即 是否 畅享全屏模式, 目前 没有多试 , 仅知道 启动时可以设置, 页面是否可以独立设置,暂未深入
+  public static FULL_SCREEN: boolean = true;
+
+  //system bar height
+  public static system_bar_height = 0
+
+  //nav bar height
+  public static system_nav_bar_height = 0
 
   public static getBaseUrl() {
     let baseURL = ''
@@ -61,22 +63,7 @@ export class GlobalConstant {
     return baseURL;
     // return GlobalConstant.base_url_test
   }
-
-  /**
-   * 获取版本号
-   * @returns 3.2.1
-   */
-  public static getVersionCode(): string {
-    return this.appInfo.versionName;
-  }
 }
 
 ///export default 关键字来默认导出一个变量、函数或类。每个文件只能有一个默认导出。
 // export default new GlobalConstant();
-
-
-export enum PageState {
-  Loading = 0,
-  Normal = 1,
-  Fail = 2,
-}

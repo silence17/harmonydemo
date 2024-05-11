@@ -54,6 +54,9 @@ export class LoginViewModel {
 
   // 使用 callback: Function 亦可
   login(phone: string, pwd: string, callback: (userInfo: UserInfoBean) => void) {
+
+    //this.login2(phone, pwd)
+
     let httpRequest = http.createHttp();
 
     httpRequest.on('headersReceive', (header) => {

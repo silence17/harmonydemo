@@ -7,6 +7,9 @@ import { CACHE_USER_INFO } from '@app/common_lib/src/main/ets/app/GlobalConstant
 import { ShopCartPage } from './ShopCartPage';
 import { Log } from '@app/common_lib/src/main/ets/utils/Log/Log';
 
+//1.首先查询在PersistentStorage本地文件中是否存在“aProp”
+//2.接着查询属性“aProp”在AppStorage中是否存在，依旧不存在
+//3.在AppStorge中创建名为“aProp”的string类型属性，属性初始值是定义的默认值''。
 PersistentStorage.PersistProp<string>(CACHE_USER_INFO, '')
 
 

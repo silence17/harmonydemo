@@ -7,6 +7,10 @@
   "main": "",
   "version": "1.0.0",
   "dependencies": {
-    "@app/common_lib": "file:../common_lib"
+    "@app/common_lib": "file:../common_lib",
+
+    //序列化和反序列化操作
+    "class-transformer": "0.5.1",
+    "reflect-metadata": "0.1.13"
   }
 }

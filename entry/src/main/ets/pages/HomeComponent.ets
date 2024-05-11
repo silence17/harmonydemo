@@ -23,7 +23,7 @@ import { Banner } from '../view/banner/Banner';
 import { RefreshLoadLayout } from '@app/common_lib/src/main/ets/components/view/RefreshLoadLayout';
 import { RefreshLoadLayoutBean } from '@app/common_lib/src/main/ets/bean/RefreshLoadLayoutBean';
 import { JumpAbility } from '@app/common_lib/src/main/ets/utils/JumpAbility';
-import { PageState } from '@app/common_lib/src/main/ets/app/GlobalConstant';
+import { GlobalConstant, PageState } from '@app/common_lib/src/main/ets/app/GlobalConstant';
 import { RefreshFailLayout } from '@app/common_lib/src/main/ets/components/view/RefreshFailLayout';
 import { FailLayoutBean } from '@app/common_lib/src/main/ets/bean/FailLayoutBean';
 import { IconBean } from '../bean/IconBean';
@@ -73,6 +73,10 @@ export struct HomeComponent {
           .fontSize(12)
           .fontColor('#999999')
           .layoutWeight(1)
+          .onClick(() => {
+            GlobalConstant.DELAY_TIME = 123
+            ToastUtil.showToast('===== ' + GlobalConstant.DELAY_TIME)
+          })
 
         Image($r('app.media.icon_search'))
           .height(17)

@@ -7,7 +7,7 @@ import { CACHE_USER_INFO, GlobalConstant } from '@app/common_lib/src/main/ets/ap
 import { Log, UserUtil } from '@app/common_lib';
 
 /**
- * //@Provide和@Consume可以通过相同的变量名或者相同的变量别名绑定，变量类型必须相同。
+ * @Provide和@Consume可以通过相同的变量名或者相同的变量别名绑定，变量类型必须相同。
  */
 @Preview
 @Component

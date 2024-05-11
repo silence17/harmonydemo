@@ -109,11 +109,16 @@ struct LoginPage {
         .backgroundColor(this.btnColor)
         .id('login')
         .onClick((event) => {
-          this.viewModel.login(this.phone, this.pwd, (userInfo: UserInfoBean) => {
-            this.jumpToMainAbility()
-            //登陆成功回调
-            AppStorage.Set<string>(CACHE_USER_INFO, JSON.stringify(userInfo));
-          })
+
+          ToastUtil.showToast('===== ' + GlobalConstant.DELAY_TIME)
+          GlobalConstant.DELAY_TIME = 987
+
+
+          // this.viewModel.login(this.phone, this.pwd, (userInfo: UserInfoBean) => {
+          //   this.jumpToMainAbility()
+          //   //登陆成功回调
+          //   AppStorage.Set<string>(CACHE_USER_INFO, JSON.stringify(userInfo));
+          // })
         })
 
       Text('忘记密码')
